@@ -1,23 +1,20 @@
-# mcv-m5
-Master in Computer Vision - M5 Visual recognition
+# Team 5
+Master in Computer Vision - M5 Visual recognition.
 
-## Fork this project
-Fork this project to start your group project. Add dvazquezcvc and lluisgomez as contributors.
+Professors: [dvazquezcvc](https://github.com/dvazquezcvc) and [lluisgomez](https://github.com/lluisgomez).
 
-## Project description
+## Abstract
+
+## Report
+
 Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
 
 ## Project slides
 - Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)
-- Google slides for Week 2 (T.B.A.)
-- Google slides for Week 3 (T.B.A.)
-- Google slides for Week 4 (T.B.A.)
-- Google slides for Week 5 (T.B.A.)
-- Google slides for Week 6 (T.B.A.)
-- Google slides for Week 7 (T.B.A.)
 
-## Peer review
-- Intra-group evaluation form for Week 2 (T.B.A.)
-- Intra-group evaluation form for Week 4 (T.B.A.)
-- Intra-group evaluation form for Week 6 (T.B.A.)
-- Intra-group evaluation form for Week 7 (T.B.A.)
+## Contributors
+
+ * [Idoia Ruiz](https://github.com/idoiaruiz) (idoiaruizl@gmail.com)
+ * [Roque Rodriguez](https://github.com/RoqueRouteiral) (roque.rodriguez.outeiral@gmail.com)
+ * [Lidia Talavera](https://github.com/LidiaTalavera) (talaveramartinez.l@gmail.com)
+ * [Onofre Martorell](https://github.com/OnofreMartorell) (onofremartorelln@gmail.com)

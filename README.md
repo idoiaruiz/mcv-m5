@@ -7,7 +7,7 @@ Professors: [dvazquezcvc](https://github.com/dvazquezcvc) and [lluisgomez](https
 
 ## Report
 
-Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
+Overleaf document for the  [report](https://www.overleaf.com/read/pkxqmvsfjwqm)
 
 ## Project slides
 - Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)

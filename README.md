@@ -10,8 +10,7 @@ Professors: [dvazquezcvc](https://github.com/dvazquezcvc) and [lluisgomez](https
 Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
 
 ## Project slides
-- Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)
-- Google slides for the [project](https://drive.google.com/open?id=1xjIemmBNH8XuA9MFeBLiE718U4IJnI8zhXV-gAfD86o) 
+Google slides for the [project](https://drive.google.com/open?id=1xjIemmBNH8XuA9MFeBLiE718U4IJnI8zhXV-gAfD86o) 
 ## Contributors
 
  * [Idoia Ruiz](https://github.com/idoiaruiz) (idoiaruizl@gmail.com)

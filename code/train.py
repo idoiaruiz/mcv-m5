@@ -83,9 +83,9 @@ def main():
     parser.add_argument('-e', '--exp_name', type=str,
                         default=None, help='Name of the experiment')
     parser.add_argument('-s', '--shared_path', type=str,
-                        default='/data', help='Name of the experiment')
+                        default='/share/mastergpu/module5', help='Name of the experiment')
     parser.add_argument('-l', '--local_path', type=str,
-                        default='/datatmp', help='Name of the experiment')
+                        default='/share/mastergpu/module5', help='Name of the experiment')
 
     arguments = parser.parse_args()
 
@@ -101,8 +101,8 @@ def main():
     local_path = arguments.local_path
     dataset_path = os.path.join(local_path, 'Datasets')
     shared_dataset_path = os.path.join(shared_path, 'Datasets')
-    experiments_path = os.path.join(local_path, getuser(), 'Experiments')
-    shared_experiments_path = os.path.join(shared_path, getuser(), 'Experiments')
+    experiments_path = os.path.join('~/M5/results', 'Experiments')
+    shared_experiments_path = os.path.join('~/M5/results', 'Experiments')
 
     # Load configuration files
     configuration = Configuration(arguments.config_path, arguments.exp_name,

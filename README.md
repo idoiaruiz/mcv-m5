@@ -5,6 +5,8 @@ Professors: [dvazquezcvc](https://github.com/dvazquezcvc) and [lluisgomez](https
 
 ## Abstract
 
+This project aims to achieve scene understanding for autonomous vehicles by applying the basic concepts and techniques of deep learning. We will be able to perform object detection, recognition, and semantic segmentation on images recorded by an on-board vehicle camera.
+
 ## Report
 
 Overleaf document for the  [report](https://www.overleaf.com/read/pkxqmvsfjwqm)

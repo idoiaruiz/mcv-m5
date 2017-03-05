@@ -8,7 +8,8 @@ This repo contains the code to train and evaluate state of the art classificatio
 
 ### Classification
  - [x] VGG16 and VGG19 network as described in [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf).
- 
+ - [ ] [ResNet](https://arxiv.org/pdf/1512.03385.pdf).
+
 ### Detection
  - [X] YOLO network as described in [You Only Look Once: Unified, Real-Time Object Detection](https://pjreddie.com/media/files/papers/yolo.pdf).
   

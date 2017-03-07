@@ -101,8 +101,8 @@ def main():
     local_path = arguments.local_path
     dataset_path = os.path.join(local_path, 'Datasets')
     shared_dataset_path = os.path.join(shared_path, 'Datasets')
-    experiments_path = os.path.join('~/M5/results', 'Experiments')
-    shared_experiments_path = os.path.join('~/M5/results', 'Experiments')
+    experiments_path = os.path.join('/home/master/M5/results', 'Experiments')
+    shared_experiments_path = os.path.join('/home/master/M5/results', 'Experiments')
 
     # Load configuration files
     configuration = Configuration(arguments.config_path, arguments.exp_name,

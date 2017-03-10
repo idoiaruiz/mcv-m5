@@ -10,7 +10,8 @@ AveragePooling2D, GlobalAveragePooling2D
 # Paper:
 
 
-def build_denseNet(img_shape=(3, 224, 224), n_classes=1000, freeze_layers_from='base_model'):
+def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay,
+                      freeze_layers_from='base_model', path_weights=None):
 
     # Layers before dense blocks
     inp = Input(shape=img_shape)

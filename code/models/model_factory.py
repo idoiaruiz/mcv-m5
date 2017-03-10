@@ -20,7 +20,7 @@ from models.fcn8 import build_fcn8
 #from models.unet import build_unet
 #from models.segnet import build_segnet
 #from models.resnetFCN import build_resnetFCN
-#from models.densenetFCN import build_densenetFCN
+from models.densenetFCN import build_densenetFCN
 
 # Adversarial models
 #from models.adversarial_semseg import Adversarial_Semseg

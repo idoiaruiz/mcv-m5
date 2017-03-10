@@ -1,16 +1,15 @@
 # Keras imports
 import keras.backend as K
-from keras.layers.convolutional import (Convolution2D, MaxPooling2D,
-                                        ZeroPadding2D)
-from keras.models import Model, Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten, Input,
-AveragePooling2D, GlobalAveragePooling2D
-
+from keras.layers.convolutional import Convolution2D, MaxPooling2D
+from keras.models import Model
+from keras.layers import Dense, Dropout, Activation, Input, AveragePooling2D, GlobalAveragePooling2D
+from keras.layers.normalization import BatchNormalization
+from keras.engine.topology import merge
 
 # Paper:
 
 
-def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay,
+def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
                       freeze_layers_from='base_model', path_weights=None):
 
     # Layers before dense blocks
@@ -33,7 +32,6 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay,
 
     # Add final layers
     x = GlobalAveragePooling2D(dim_ordering=K.image_dim_ordering())(x)  # Base model
-    x = Flatten(name="flatten")(x)
     predictions = Dense(n_classes, activation='softmax',
                         name='classification_layer')(x)
 
@@ -59,7 +57,7 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay,
 
 
 def denseBlock(x, n_layers, growth_rate, n_filter):
-    past_features = x
+    past_features = [x]
 
     if K.image_dim_ordering() == 'th':
         concat_axis = 1
@@ -72,7 +70,7 @@ def denseBlock(x, n_layers, growth_rate, n_filter):
         x = Convolution2D(growth_rate, 1, 1, border_mode='same')(x)
         x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
-        x = Convolution2D(k, 3, 3, border_mode='same')(x)
+        x = Convolution2D(growth_rate, 3, 3, border_mode='same')(x)
         #x = Dropout(dropout_fraction)(x)
 
         past_features.append(x)

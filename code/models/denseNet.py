@@ -1,10 +1,11 @@
 # Keras imports
 import keras.backend as K
+from keras.layers.convolutional import (Convolution2D, MaxPooling2D,
+                                        ZeroPadding2D)
 from keras.models import Model, Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Input,
 AveragePooling2D, GlobalAveragePooling2D
-from keras.layers.convolutional import (Convolution2D, MaxPooling2D,
-                                        ZeroPadding2D)
+
 
 # Paper:
 
@@ -13,17 +14,27 @@ def build_denseNet(img_shape=(3, 224, 224), n_classes=1000, freeze_layers_from='
 
     # Layers before dense blocks
     inp = Input(shape=img_shape)
-    x = Convolution2D(32, 7, 7, subsample=(2, 2),
+    n_filter = 32
+    x = Convolution2D(n_filter, 7, 7, subsample=(2, 2),
                       border_mode='same', name='conv1')(inp)
-    x = AveragePooling2D(pool_size=(3, 3), strides=(2, 2))(x)
+    x = MaxPooling2D(pool_size=(3, 3), strides=(2, 2))(x)
 
-    # Add dense blocks
-
+    # Add dense blocks: 4 blocks of 10 layers -> 40 layers
+    growth_rate = 12
+    n_layers = 10
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x = transitionLayer(x, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x = transitionLayer(x, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x = transitionLayer(x, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
 
     # Add final layers
-    x = GlobalAveragePooling2D(dim_ordering=K.image_dim_ordering())(x)
+    x = GlobalAveragePooling2D(dim_ordering=K.image_dim_ordering())(x)  # Base model
     x = Flatten(name="flatten")(x)
-    predictions = Dense(n_classes, activation='softmax', name='classification_layer')(x)
+    predictions = Dense(n_classes, activation='softmax',
+                        name='classification_layer')(x)
 
     # This is the model we will train
     model = Model(input=inp, output=predictions)
@@ -46,7 +57,7 @@ def build_denseNet(img_shape=(3, 224, 224), n_classes=1000, freeze_layers_from='
     return model
 
 
-def denseBlock(x, k, nb_filter):
+def denseBlock(x, n_layers, growth_rate, n_filter):
     past_features = x
 
     if K.image_dim_ordering() == 'th':
@@ -54,26 +65,26 @@ def denseBlock(x, k, nb_filter):
     elif K.image_dim_ordering() == 'tf':
         concat_axis = -1
 
-    for ki in range(k):
-        x = BatchNormalization(mode=0, axis=1)(x)
+    for i in range(n_layers):
+        x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
-        x = Convolution2D(k, 1, 1, border_mode='same')(x)
-        x = BatchNormalization(mode=0, axis=1)(x)
+        x = Convolution2D(growth_rate, 1, 1, border_mode='same')(x)
+        x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
         x = Convolution2D(k, 3, 3, border_mode='same')(x)
         #x = Dropout(dropout_fraction)(x)
 
         past_features.append(x)
         x = merge(past_features, mode='concat', concat_axis=concat_axis)
-        nb_filter += k
+        n_filter += growth_rate
 
-    output = x, nb_filter
+    output = x
 
-    return output
+    return output, n_filter
 
 
-def transitionLayer(x, nb_filter):
-    x = Convolution2D(nb_filter, 1, 1, border_mode="same")(x)
+def transitionLayer(x, n_filter):
+    x = Convolution2D(n_filter, 1, 1, border_mode="same")(x)
     x = AveragePooling2D((2, 2), strides=(2, 2))(x)
 
     output = x

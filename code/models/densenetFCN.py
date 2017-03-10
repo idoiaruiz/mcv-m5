@@ -14,7 +14,7 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay,
                       freeze_layers_from='base_model', path_weights=None):
 
     # Layers before dense blocks
-    inp = Input(shape=img_shape)
+    inp = Input(shape=in_shape)
     n_filter = 32
     x = Convolution2D(n_filter, 7, 7, subsample=(2, 2),
                       border_mode='same', name='conv1')(inp)

@@ -1,16 +1,17 @@
 # Keras imports
 from keras.models import Model, Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers.convolutional import (Convolution2D, MaxPooling2D,
+from keras.layers.convolutional import (Convolution2D, MaxPooling2D, AveragePooling2D,
                                         ZeroPadding2D)
 
-from keras.applications.vgg16 import VGG16
-from keras.applications.vgg19 import VGG19
+from keras.applications.resnet50 import ResNet50
 
-# Paper: https://arxiv.org/pdf/1409.1556.pdf
 
-def build_vgg(img_shape=(3, 224, 224), n_classes=1000, n_layers=16, l2_reg=0.,
+# Paper: https://arxiv.org/abs/1512.03385
+
+def build_resnet50(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,
                 load_imageNet=False, freeze_layers_from='base_model'):
+
     # Decide if load pretrained weights from imagenet
     if load_imageNet:
         weights = 'imagenet'
@@ -18,23 +19,13 @@ def build_vgg(img_shape=(3, 224, 224), n_classes=1000, n_layers=16, l2_reg=0.,
         weights = None
 
     # Get base model
-    if n_layers==16:
-        base_model = VGG16(include_top=False, weights=weights,
-                           input_tensor=None, input_shape=img_shape)
-    elif n_layers==19:
-        base_model = VGG19(include_top=False, weights=weights,
-                           input_tensor=None, input_shape=img_shape)
-    else:
-        raise ValueError('Number of layers should be 16 or 19')
+
+    base_model = ResNet50(include_top=True, weights=weights, input_tensor=None, input_shape=None)
 
     # Add final layers
-    x = base_model.output
-    x = Flatten(name="flatten")(x)
-    x = Dense(4096, activation='relu', name='dense_1')(x)
-    x = Dropout(0.5)(x)
-    x = Dense(4096, activation='relu', name='dense_2')(x)
-    x = Dropout(0.5)(x)
-    x = Dense(n_classes, name='dense_3')(x)
+    x = base_model.layers[-3].output
+    x = Flatten()(x)
+    x = Dense(n_classes, name='fc1000')(x)
     predictions = Activation("softmax", name="softmax")(x)
 
     # This is the model we will train

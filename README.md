@@ -11,7 +11,7 @@ This project aims to achieve scene understanding for autonomous vehicles by appl
 ## Documents :clipboard:
 - Overleaf document for the  [report](https://www.overleaf.com/read/pkxqmvsfjwqm)
 - Google [slides](https://drive.google.com/open?id=1xjIemmBNH8XuA9MFeBLiE718U4IJnI8zhXV-gAfD86o)
-- [Summaries](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#models) of the models
+- [Summaries and results](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#models) for the used models
 
 ## Contributors :couple::couple:
  * [Idoia Ruiz](https://github.com/idoiaruiz) (idoiaruizl@gmail.com)

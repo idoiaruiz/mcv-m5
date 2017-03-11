@@ -10,9 +10,9 @@ from keras.applications.vgg19 import VGG19
 # Paper: https://arxiv.org/pdf/1409.1556.pdf
 
 def build_vgg(img_shape=(3, 224, 224), n_classes=1000, n_layers=16, l2_reg=0.,
-                load_pretrained=False, freeze_layers_from='base_model'):
+                load_imageNet=False, freeze_layers_from='base_model'):
     # Decide if load pretrained weights from imagenet
-    if load_pretrained:
+    if load_imageNet:
         weights = 'imagenet'
     else:
         weights = None

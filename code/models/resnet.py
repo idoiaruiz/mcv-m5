@@ -10,16 +10,16 @@ from keras.applications.resnet50 import ResNet50
 # Paper: https://arxiv.org/abs/1512.03385
 
 def build_resnet50(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,
-                load_pretrained=False, freeze_layers_from='base_model'):
-    
+                load_imageNet=False, freeze_layers_from='base_model'):
+
     # Decide if load pretrained weights from imagenet
-    if load_pretrained:
+    if load_imageNet:
         weights = 'imagenet'
     else:
         weights = None
 
     # Get base model
-    
+
     base_model = ResNet50(include_top=True, weights=weights, input_tensor=None, input_shape=None)
 
     # Add final layers

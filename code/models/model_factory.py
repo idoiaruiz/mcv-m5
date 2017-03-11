@@ -137,25 +137,25 @@ class Model_Factory():
             model = build_alexNet(in_shape, cf.dataset.n_classes, cf.weight_decay)
         elif cf.model_name == 'vgg16':
             model = build_vgg(in_shape, cf.dataset.n_classes, 16, cf.weight_decay,
-                              load_pretrained=cf.load_imageNet,
+                              load_imageNet=cf.load_imageNet,
                               freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'vgg19':
             model = build_vgg(in_shape, cf.dataset.n_classes, 19, cf.weight_decay,
-                              load_pretrained=cf.load_imageNet,
+                              load_imageNet=cf.load_imageNet,
                               freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'resnet50':
             model = build_resnet50(in_shape, cf.dataset.n_classes, cf.weight_decay,
-                                   load_pretrained=cf.load_imageNet,
+                                   load_imageNet=cf.load_imageNet,
                                    freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'InceptionV3':
             model = build_inceptionV3(in_shape, cf.dataset.n_classes,
                                       cf.weight_decay,
-                                      load_pretrained=cf.load_imageNet,
+                                      load_imageNet=cf.load_imageNet,
                                       freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'yolo':
             model = build_yolo(in_shape, cf.dataset.n_classes,
                                cf.dataset.n_priors,
-                               load_pretrained=cf.load_imageNet,
+                               load_imageNet=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from)
         else:
             raise ValueError('Unknown model')

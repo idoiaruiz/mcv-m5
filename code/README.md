@@ -11,6 +11,7 @@ This repo contains the code to train and evaluate state of the art classificatio
  - [x] [ResNet](https://arxiv.org/pdf/1512.03385.pdf).
  - [x] InceptionV3
  - [x] DenseNet
+
 ### Detection
  - [x] YOLO network as described in [You Only Look Once: Unified, Real-Time Object Detection](https://pjreddie.com/media/files/papers/yolo.pdf).
 

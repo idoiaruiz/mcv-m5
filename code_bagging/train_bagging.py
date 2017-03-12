@@ -7,7 +7,7 @@ import matplotlib
 matplotlib.use('Agg')  # Faster plot
 
 # Import tools
-from config.configuration import Configuration
+from config.configuration_bagging import Configuration
 from tools.logger import Logger
 from tools.dataset_generators import Dataset_Generators
 from tools.optimizer_factory import Optimizer_Factory

@@ -6,34 +6,34 @@ perc_mb2                     = None            # Percentage of data from the sec
 
 # Model
 model_name                   = 'vgg16'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
-freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
+freeze_layers_from           = 'base_model'            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
 show_model                   = False           # Show the architecture layers
 load_imageNet                = False           # Load Imagenet weights and normalize following imagenet procedure
-load_pretrained              = False           # Load a pretrained model for doing finetuning
-weights_file                 = 'weights.hdf5'  # Training weight file name
+load_pretrained              = True           # Load a pretrained model for doing finetuning
+weights_file                 = '/home/master/M5/results/Experiments/TT100K_trafficSigns/idoiavggtrain/weights.hdf5'  # Training weight file name
 
 #Parameters for bagging
-samples_per_bootstrap =  0               #Number of samples for bootstrap
-number_bootstraps =   0                  #Number of bootstraps used for bagging
-copy_files = True                       #Create new datasets for bagging
+samples_per_bootstrap =  7500               #Number of samples for bootstrap
+number_bootstraps =  4                   #Number of bootstraps used for bagging
+copy_files = True                      #Create new datasets for bagging
 num_bootstrap = -1
 
 # Parameters
-train_model                  = True            # Train the model
+train_model                  = True           # Train the model
 test_model                   = True           # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = True           # Use only few images for debuging
+debug                        = False           # Use only few images for debuging
 debug_images_train           = 50              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 50              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 50              # N images for testing in debug mode (-1 means all)
-debug_n_epochs               = 2               # N of training epochs in debug mode
+debug_n_epochs               = 3               # N of training epochs in debug mode
 
 # Batch sizes
 batch_size_train             = 10              # Batch size during training
-batch_size_valid             = 30              # Batch size during validation
-batch_size_test              = 30              # Batch size during testing
+batch_size_valid             = 50              # Batch size during validation
+batch_size_test              = 50              # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
@@ -53,7 +53,7 @@ seed_test                    = 1924            # Random seed for the testing shu
 optimizer                    = 'rmsprop'       # Optimizer
 learning_rate                = 0.0001          # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
-n_epochs                     = 30              # Number of epochs during training
+n_epochs                     = 9              # Number of epochs during training
 
 # Callback save results
 save_results_enabled         = False           # Enable the Callback

@@ -17,7 +17,7 @@ class Configuration():
         self.experiments_path = experiments_path
         self.shared_experiments_path = shared_experiments_path
 
-    def load(self, num_bootstrap):
+    def load(self):
         config_path = self.config_path
         exp_name = self.exp_name
         dataset_path = self.dataset_path
@@ -28,7 +28,7 @@ class Configuration():
         # Load configuration file
         print config_path
         cf = imp.load_source('config', config_path)
-
+        
         # Save extra parameter
         cf.config_path = config_path
         cf.exp_name = exp_name
@@ -47,7 +47,7 @@ class Configuration():
         # Load dataset configuration
         cf.dataset = self.load_config_dataset(cf.dataset_name, dataset_path,
                                               shared_dataset_path,
-                                              cf.problem_type, num_bootstrap,
+                                              cf.problem_type, cf.num_bootstrap,
                                               'config_dataset')
         if cf.dataset_name2:
             cf.dataset2 = self.load_config_dataset(cf.dataset_name2,

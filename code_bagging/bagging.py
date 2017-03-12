@@ -30,20 +30,22 @@ def main():
     
     cf = imp.load_source('config', arguments.config_path)
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    cmd  = "python train.py -c config/tt100k_classif.py -e pruebaonofre"
+    
     # Create datasets
     if cf.copy_files:
-        print ('Creating ' + str(cf.number_bootstraps) + ' of ' + str(cf.samples_per_bootstrap) + 'files')
+        print ('Creating ' + str(cf.number_bootstraps) + ' datasets of ' + str(cf.samples_per_bootstrap) + ' images')
         createDataPaths(cf.samples_per_bootstrap, cf.number_bootstraps, cf.dataset_name)
+        
     if cf.train_model:  
         for bootstrap in range(cf.number_bootstraps):
             modify_line_file(19, arguments.config_path, 'num_bootstrap = ' + str(bootstrap))
             #Call and train all the networks of the ensemble
-            cmd = "CUDA_VISIBLE_DEVICES=0 python train_bagging.py -c " + arguments.config_path + " -e " + arguments.exp_name + "/bootstrap_" + str(bootstrap)
+            cmd = "python train_bagging.py -c " + arguments.config_path + " -e " + arguments.exp_name + "/bootstrap_" + str(bootstrap)
             run(cmd)
+           
     if cf.test_model:
         #Get the weights from training and build the ensemble
-        cmd  = "CUDA_VISIBLE_DEVICES=0 python test_bagging.py -c " + arguments.config_path + " -e " + arguments.exp_name
+        cmd  = "python test_bagging.py -c " + arguments.config_path + " -e " + arguments.exp_name
         run(cmd)
     
 

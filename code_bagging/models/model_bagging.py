@@ -102,19 +102,34 @@ class One_Net_Model(Model):
             print ('   Predicting time: {}. FPS: {}. Seconds per Frame: {}'.format(total_time, fps, s_p_f))
 
     # Test the model
-    def test(self, test_gen):
+    def test_test(self, test_gen):
         if self.cf.test_model:
             print('\n > Testing the model...')
             # Load best trained model
             self.model.load_weights(self.cf.weights_file)
 
             # Evaluate model
-#            start_time = time.time()
-#            test_metrics = self.model.evaluate_generator(test_gen,
-#                                                         self.cf.dataset.n_images_test,
-#                                                         max_q_size=10,
-#                                                         nb_worker=1,
-#                                                         pickle_safe=False)
+            self.cf.dataset.n_images_test = 7706
+#            print 'self.cf.dataset.n_images_test: ' + str(self.cf.dataset.n_images_test)
+            prediction_labels = self.model.predict_generator(test_gen,
+                                                         self.cf.dataset.n_images_test,
+                                                         max_q_size=10,
+                                                         nb_worker=1,
+                                                         pickle_safe=False)
+
+
+
+
+            return prediction_labels
+    def test_validation(self, test_gen):
+        if self.cf.test_model:
+            print('\n > Testing the model...')
+            # Load best trained model
+            self.model.load_weights(self.cf.weights_file)
+
+            # Evaluate model
+            self.cf.dataset.n_images_test = 741
+#            print 'self.cf.dataset.n_images_test: ' + str(self.cf.dataset.n_images_test)
             prediction_labels = self.model.predict_generator(test_gen,
                                                          self.cf.dataset.n_images_test,
                                                          max_q_size=10,

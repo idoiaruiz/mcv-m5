@@ -25,7 +25,7 @@ from models.fcn8 import build_fcn8
 # Adversarial models
 #from models.adversarial_semseg import Adversarial_Semseg
 
-from models.model import One_Net_Model
+from models.model_bagging import One_Net_Model
 
 
 # Build the model
@@ -63,10 +63,12 @@ class Model_Factory():
             
             
             cf.load_pretrained = True
+            
             models = [0 for i in range(cf.number_bootstraps)]
             for bootstrap in range(cf.number_bootstraps):
+                cf.weights_file = '/home/master/M5/results/Experiments/TT100K_trafficSigns/' + cf.exp_name + "/bootstrap_" + str(bootstrap) + '/weights.hdf5'
                 models[bootstrap] = self.make_one_net_model(cf, in_shape, loss, metrics,
-                                            optimizer, bootstrap)
+                                            optimizer)
 
         else:
             raise ValueError('Unknown model name')
@@ -77,7 +79,7 @@ class Model_Factory():
 
     # Creates, compiles, plots and prints a Keras model. Optionally also loads its
     # weights.
-    def make_one_net_model(self, cf, in_shape, loss, metrics, optimizer, bootstrap):
+    def make_one_net_model(self, cf, in_shape, loss, metrics, optimizer):
         # Create the *Keras* model
         if cf.model_name == 'fcn8':
             model = build_fcn8(in_shape, cf.dataset.n_classes, cf.weight_decay,
@@ -136,7 +138,7 @@ class Model_Factory():
         # Load pretrained weights
         if cf.load_pretrained:
             print('   loading model weights from: ' + cf.weights_file + '...')
-            model.load_weights(cf.savepath + cf.weights_file, by_name=True)
+            model.load_weights(cf.weights_file, by_name=True)
 
         # Compile model
         model.compile(loss=loss, metrics=metrics, optimizer=optimizer)

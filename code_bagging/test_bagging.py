@@ -25,13 +25,13 @@ def process(cf):
     train_gen, valid_gen, test_gen = Dataset_Generators().make(cf)
 
     # Create the optimizer
-    print ('\n > Creating optimizer...')
+    
     optimizer = Optimizer_Factory().make(cf)
 
     # Build model
     #Need to load different weights for each model
     cf.load_pretrained = True
-    print ('\n > Building model...')
+    print ('\n > Building models...')
     models = Model_Factory().make(cf, optimizer)
 
 

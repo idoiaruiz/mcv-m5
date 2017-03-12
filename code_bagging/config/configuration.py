@@ -49,6 +49,10 @@ class Configuration():
                                               shared_dataset_path,
                                               cf.problem_type,
                                               'config_dataset')
+        print 'Test dataset size: ' + str(cf.dataset.n_images_test)
+        print 'Test dataset size: ' + str(cf.dataset.n_images_test)
+        print 'Test dataset size: ' + str(cf.dataset.n_images_test)
+        print 'Test dataset size: ' + str(cf.dataset.n_images_test)
         if cf.dataset_name2:
             cf.dataset2 = self.load_config_dataset(cf.dataset_name2,
                                                    dataset_path,
@@ -115,7 +119,7 @@ class Configuration():
         print 'dataset_config_path', dataset_config_path
         dataset_conf = imp.load_source(name, dataset_config_path)
         dataset_conf.config_path = dataset_config_path
-
+        
         # Compose dataset paths
         dataset_conf.path = dataset_path
         if dataset_conf.class_mode == 'segmentation':

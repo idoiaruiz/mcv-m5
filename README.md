@@ -6,7 +6,18 @@ Professors: [dvazquezcvc](https://github.com/dvazquezcvc) and [lluisgomez](https
 Team: *Living dead students* :mortar_board:
 
 ## Abstract
-This project aims to achieve scene understanding for autonomous vehicles by applying deep learning state of the art techniques. We perform object detection, recognition, and semantic segmentation, evaluated on images from urban driving [datasets](https://github.com/idoiaruiz/mcv-m5/tree/master/code#available-dataset-wrappers).
+Applying and analysing deep learning state of the art techniques, we perform object detection, recognition, and semantic segmentation, evaluated on images from urban driving [datasets](https://github.com/idoiaruiz/mcv-m5/tree/master/code#available-dataset-wrappers).
+
+## Tasks progress :chart_with_upwards_trend:
+### Object recognition
+For the object recognition problem, we implement and test several architectures, training them from scratch as well as fine-tuning using pretrained weights. We also boost the performance of the networks using different pre-processing techniques, and performing data augmentation and hyperparameter optimization.
+ - [x] Implement ResNet architecture and train it both from scratch and fine-tuning using ImageNet weights
+ - [x] Implement InceptionV3 architecture and train it both from scratch and fine-tuning using ImageNet weights
+ - [x] Implement DenseNet and train it from scratch. Test the use of Dropout layers.
+ - [x] Transfer learning between TT100K and BelgiumTSC datasets using the VGG model.
+ - [ ] Try several pre-processing methods for the TT100K dataset with VGG model.
+ - [ ] Evaluate crop vs resize for the input images for the VGG model with TT100K dataset.
+ - [ ] Boost the performance of the VGG model using data augmentation, bagging as well as optimizing the hyperparameters.
 
 ## Documents :clipboard:
 - Overleaf document for the  [report](https://www.overleaf.com/read/pkxqmvsfjwqm)

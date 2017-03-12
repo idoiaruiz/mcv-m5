@@ -6,6 +6,7 @@
 VGG architecture is a widely known convolutional neural network with outstanding results for image classification. It is based on very deep models (up to 19 layers) with small convolutional filters (3x3, 5x5 and even 1x1). On this work, several depths between 16 and 19 layers are evaluated with this small filters. In addition to the new architectures, the work is also focused on studying the effects of normalization (L2, batch normalization and local response normalization), the scaling of the image on training and testing time, the multicropping approach and the fusion of different models. Finally, the VGG model is also proved to worked for localization and to be applied for other datasets.
 ### Results
 
+[Weights file]() | [Configuration file]() | [Implementation](code/models/vgg.py)
 
 ## ResNet
 [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
@@ -15,10 +16,16 @@ ResNet is a framework that comes from a modification of the common Convolutional
 The authors use this idea to create a new CNN architecture. They create a bottleneck architecture where each block (that corresponds to a residual function) has 1x1, 3x3 and 1x1 convolutional layers. Trying different depths, going from 50 up to 152 layers, and comparing this new architecture with the state-of-the-art architectures, as GoogleNet and VGG, the authors obtain a smaller test error using the 152-layer ResNet.
 ### Results
 
+[Weights file]() | [Configuration file]() | [Implementation](code/models/resnet.py)
+
 ## InceptionV3
 Rethinking the Inception Architecture for Computer Vision
 ### Results
 
+[Weights file]() | [Configuration file]() | [Implementation](code/models/inceptionV3.py)
+
 ## DenseNet
 Densely Connected Convolutional Networks
 ### Results
+
+[Weights file]() | [Configuration file]() | [Implementation](code/models/densenetFCN.py)

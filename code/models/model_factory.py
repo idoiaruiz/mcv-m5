@@ -27,6 +27,7 @@ from models.densenetFCN import build_densenetFCN
 
 from models.model import One_Net_Model
 
+from keras.models import model_from_json
 
 # Build the model
 class Model_Factory():
@@ -163,7 +164,20 @@ class Model_Factory():
         # Load pretrained weights
         if cf.load_pretrained:
             print('   loading model weights from: ' + cf.weights_file + '...')
-            model.load_weights(cf.weights_file, by_name=True)
+            # If the weights are from different datasets
+            if cf.different_datasets:
+                if cf.freeze_layers_from == 'base_model':
+                    raise TypeError('Please, enter the layer id instead of "base_model"'
+                          ' for the freeze_layers_from config parameter')
+                croppedmodel = model_from_json(model.to_json())
+                # Remove not frozen layers
+                for i in range(len(model.layers[cf.freeze_layers_from:])):
+                    croppedmodel.layers.pop()
+                # Load weights only for the frozen layers
+                croppedmodel.load_weights(cf.weights_file, by_name=True)
+                model.set_weights(croppedmodel.get_weights())
+            else:
+                model.load_weights(cf.weights_file, by_name=True)
 
         # Compile model
         model.compile(loss=loss, metrics=metrics, optimizer=optimizer)

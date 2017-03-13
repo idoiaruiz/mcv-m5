@@ -25,7 +25,14 @@ Rethinking the Inception Architecture for Computer Vision
 [Weights file]() | [Configuration file]() | [Implementation](inceptionV3.py)
 
 ## DenseNet
-Densely Connected Convolutional Networks
+[Densely Connected Convolutional Networks](https://arxiv.org/pdf/1608.06993.pdf)
 ### Results
+History for training our DenseNet model from scratch with TT100K dataset.
+![DensenetPlot](https://lh5.googleusercontent.com/qBN4VRvkFOHzlzCpTf4ISlvJK_GUpmOyX5WgIu8k3fVLnpmKn0edmGZpjpljofxykKNlPDUq=w1365-h638)
+We obtain 84.27% for validation and 91.10% for the test set.
 
-[Weights file]() | [Configuration file](../config/dense_tt100k_scratch.py) | [Implementation](densenetFCN.py)
+We also test to apply Dropout layers after every convolutional layer setting the dropout rate to 0.2, obtaining:
+![DropoutDensenetPlot](https://lh4.googleusercontent.com/-Q8DULaUj7V5ZJelh2jNVTgRSy2uzyQ1DywzJZGPIZ4r0sOWbbZmgxEH2oOesR4SJYIKf3PQ=w1365-h638)
+68.31% of accuracy for the validation and 64.84% for the test set
+
+[Weights file (for the first result)](https://drive.google.com/file/d/0ByoayY6Lo-XTT1A2MjV5a0VTWlk/view?usp=sharing) | [Configuration file](../config/dense_tt100k_scratch.py) | [Implementation](densenetFCN.py)

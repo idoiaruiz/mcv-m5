@@ -24,11 +24,11 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
     n_layers = 10
     dropout_fraction = 0.0
     x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
-    x = transitionLayer(x, n_filter)
+    x = transitionLayer(x, n_filter, dropout_fraction)
     x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
-    x = transitionLayer(x, n_filter)
+    x = transitionLayer(x, n_filter, dropout_fraction)
     x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
-    x = transitionLayer(x, n_filter)
+    x = transitionLayer(x, n_filter, dropout_fraction)
     x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
 
     # Add final layers
@@ -69,6 +69,8 @@ def denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction):
         x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
         x = Convolution2D(growth_rate, 1, 1, border_mode='same')(x)
+        if dropout_fraction != 0:
+            x = Dropout(dropout_fraction)(x)
         x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
         x = Convolution2D(growth_rate, 3, 3, border_mode='same')(x)
@@ -84,8 +86,10 @@ def denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction):
     return output, n_filter
 
 
-def transitionLayer(x, n_filter):
+def transitionLayer(x, n_filter, dropout_fraction):
     x = Convolution2D(n_filter, 1, 1, border_mode="same")(x)
+    if dropout_fraction != 0:
+        x = Dropout(dropout_fraction)(x)
     x = AveragePooling2D((2, 2), strides=(2, 2))(x)
 
     output = x

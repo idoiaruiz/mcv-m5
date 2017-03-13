@@ -22,13 +22,14 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
     # Add dense blocks: 4 blocks of 10 layers -> 40 layers
     growth_rate = 12
     n_layers = 10
-    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    dropout_fraction = 0.0
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
     x = transitionLayer(x, n_filter)
-    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
     x = transitionLayer(x, n_filter)
-    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
     x = transitionLayer(x, n_filter)
-    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter)
+    x, n_filter = denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction)
 
     # Add final layers
     x = GlobalAveragePooling2D(dim_ordering=K.image_dim_ordering())(x)  # Base model
@@ -56,7 +57,7 @@ def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
     return model
 
 
-def denseBlock(x, n_layers, growth_rate, n_filter):
+def denseBlock(x, n_layers, growth_rate, n_filter, dropout_fraction):
     past_features = [x]
 
     if K.image_dim_ordering() == 'th':
@@ -71,7 +72,8 @@ def denseBlock(x, n_layers, growth_rate, n_filter):
         x = BatchNormalization(mode=0, axis=concat_axis)(x)
         x = Activation('relu')(x)
         x = Convolution2D(growth_rate, 3, 3, border_mode='same')(x)
-        #x = Dropout(dropout_fraction)(x)
+        if dropout_fraction != 0:
+            x = Dropout(dropout_fraction)(x)
 
         past_features.append(x)
         x = merge(past_features, mode='concat', concat_axis=concat_axis)

@@ -28,4 +28,4 @@ Rethinking the Inception Architecture for Computer Vision
 Densely Connected Convolutional Networks
 ### Results
 
-[Weights file]() | [Configuration file]() | [Implementation](densenetFCN.py)
+[Weights file]() | [Configuration file](../config/dense_tt100k_scratch.py) | [Implementation](densenetFCN.py)

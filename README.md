@@ -28,7 +28,7 @@ For the object recognition problem, we implement and test several architectures,
    ```
   python train.py -c config/dataset.py -e expName
    ```
-   where ```dataset.py``` is the [configuration file](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#results) for the model, and ```expName``` is the name of the directory where the results are saved for this test.
+   where ```dataset.py``` is the [configuration file](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#results) for this test, and ```expName``` is the name of the directory where the results are saved.
 
 ## Documents :clipboard:
 - Overleaf document for the  [report](https://www.overleaf.com/read/pkxqmvsfjwqm)

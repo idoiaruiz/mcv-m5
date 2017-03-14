@@ -23,7 +23,7 @@ ResNet model is trained from Scratch and with finetunning from the weights of Im
 | ResNet with finetunning with Imagenet (LR = 0.0001) | 78.06 | 79.40     |
 | ResNet with finetunning with Imagenet (LR = 0.001) |  78.89   |   83.41   |
 
-[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CUkVGQnh5SVFCVVE) | [Configuration file]() | [Implementation](resnet.py)
+[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CUkVGQnh5SVFCVVE) | [Configuration file](../config/tt100kResnetFromScratch.py) | [Implementation](resnet.py)
 
 ## InceptionV3
 Rethinking the Inception Architecture for Computer Vision
@@ -35,7 +35,7 @@ Inception V3 is trained from scratch and with finetunning from the weights of Im
 | InceptionV3 from scratch      |     94.82     |         97.39        |
 | InceptionV3 with finetunning with Imagenet | 92.13 |   98.14  |
 
-[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CRjUzMHVkN01QUHM) | [Configuration file]() | [Implementation](inceptionV3.py)
+[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CRjUzMHVkN01QUHM) | [Configuration file](../config/tt100kInceptionFromScratch.py) | [Implementation](inceptionV3.py)
 
 ## DenseNet
 [Densely Connected Convolutional Networks](https://arxiv.org/pdf/1608.06993.pdf)

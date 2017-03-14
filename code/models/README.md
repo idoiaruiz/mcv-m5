@@ -26,7 +26,7 @@ ResNet model is trained from Scratch and with finetunning from the weights of Im
 [Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CUkVGQnh5SVFCVVE) | [Configuration file](../config/tt100kResnetFromScratch.py) | [Implementation](resnet.py)
 
 ## InceptionV3
-Rethinking the Inception Architecture for Computer Vision
+[Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)
 ### Results
 Inception V3 is trained from scratch and with finetunning from the weights of Imagenet. The model is build with the convolutional block from keras and with the fully connected block of the paper.
 

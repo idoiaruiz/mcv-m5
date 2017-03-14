@@ -6,11 +6,11 @@
 VGG architecture is a widely known convolutional neural network with outstanding results for image classification. It is based on very deep models (up to 19 layers) with small convolutional filters (3x3, 5x5 and even 1x1). On this work, several depths between 16 and 19 layers are evaluated with this small filters. In addition to the new architectures, the work is also focused on studying the effects of normalization (L2, batch normalization and local response normalization), the scaling of the image on training and testing time, the multicropping approach and the fusion of different models. Finally, the VGG model is also proved to worked for localization and to be applied for other datasets.
 ### Results
 
-We have trained VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we have evaluated different techniques in the configuration file to see how it affects to the behavior of the network.
+We first train VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we evaluate different techniques in the configuration file to see how it affects to the behavior of the network.
 
 [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvWXhNVXZpdER6ZzQ) | [Configuration file](../config/Vgg16.py) | [Implementation](vgg.py)
 
-In order to perform a good comparison of the crop technique with the resize one, first we have resized the image to 256,256 and then crop it to 224,224.
+In order to perform a good comparison of the crop technique with the resize one, first we resize the image to 256,256 and then crop it to 224,224, as the images from the dataset are smalle
 
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|
@@ -20,7 +20,7 @@ In order to perform a good comparison of the crop technique with the resize one,
 [Configuration file - train Vgg16 crop](../config/tt100ktrainVggCrop.py) | [Configuration file - test Vgg16 crop](../config/tt100ktestVggCrop.py) 
 | [Configuration file - Vgg16 resize](../config/Vgg16.py) 
 
-Then some pre-processing techniques were applied in order to normalize the data. In this case we have obtained a good results by dividing the std from the dataset and also we have tested the preprocess of imageNet.
+Then some pre-processing techniques are applied in order to normalize the data. In this case we obtain good results by dividing the std from the dataset and also we test the preprocess of imageNet.
 
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|
@@ -29,7 +29,7 @@ Then some pre-processing techniques were applied in order to normalize the data.
 
 [Configuration file Std division from dataset](../config/tt100kNormalization.py) | [Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
 
-Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we have trained from scratch VGG16 with BTSC dataset.
+Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we train from scratch VGG16 with BTSC dataset.
 
 | BelgiumTS dataset and VGG16 | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|

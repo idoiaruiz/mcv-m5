@@ -6,15 +6,15 @@ perc_mb2                     = None            # Percentage of data from the sec
 
 # Model
 model_name                   = 'vgg16'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
-freeze_layers_from           = 'base_model'            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
+freeze_layers_from           = False            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
 show_model                   = False           # Show the architecture layers
 load_imageNet                = False           # Load Imagenet weights and normalize following imagenet procedure
 load_pretrained              = True           # Load a pretrained model for doing finetuning
 weights_file                 = '/home/master/M5/results/Experiments/TT100K_trafficSigns/idoiavggtrain/weights.hdf5'  # Training weight file name
 
 #Parameters for bagging
-samples_per_bootstrap =  7500               #Number of samples for bootstrap
-number_bootstraps =  4                   #Number of bootstraps used for bagging
+samples_per_bootstrap =  10000               #Number of samples for bootstrap
+number_bootstraps =  5                   #Number of bootstraps used for bagging
 copy_files = True                      #Create new datasets for bagging
 num_bootstrap = -1
 

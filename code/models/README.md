@@ -6,7 +6,51 @@
 VGG architecture is a widely known convolutional neural network with outstanding results for image classification. It is based on very deep models (up to 19 layers) with small convolutional filters (3x3, 5x5 and even 1x1). On this work, several depths between 16 and 19 layers are evaluated with this small filters. In addition to the new architectures, the work is also focused on studying the effects of normalization (L2, batch normalization and local response normalization), the scaling of the image on training and testing time, the multicropping approach and the fusion of different models. Finally, the VGG model is also proved to worked for localization and to be applied for other datasets.
 ### Results
 
-[Weights file]() | [Configuration file]() | [Implementation](vgg.py)
+We train VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we have evaluate different techniques in the configuration file to see how it affects to the behavior of the network.
+
+[Weights file]() | [Configuration file](../config/tt100ktrainVggCrop.py) | [Implementation](vgg.py)
+
+In order to perform a good comparison of the crop technique with the resize one, first we have resized the image to 256,256 and then crop it to 224,224.
+
+| Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Vgg16 resize     |     88.63    |         95.80        |
+| Vgg16 crop | 88.33 |   96.73  |
+
+[Configuration train file](../config/tt100ktrainVggCrop.py) |  
+[Configuration test file](../config/tt100ktestVggCrop.py)
+
+Then some pre-processing techniques were applied in order to normalize the data. In this case we have obtained a good result dividing the std from the dataset. Also we have tested to use the preprocess of imageNet, in this case we have obtained poor results maybe due to the number of epochs, we only have use 8, and it would need more.
+
+| Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Division of the std from the dataset     |     92.01    |         96.11        |
+| ImageNet norm. |  |    |
+
+[Configuration file Std division from dataset](../config/tt100kNormalization.py) |  
+[Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
+
+Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we have trained from scratch VGG16 with BTSC dataset.
+
+| BelgiumTS dataset and VGG16 | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Transfer learning from Tt100K dataset  |     97.10    |         97.10       |
+| Training from scratch | 96.03  |  95,91  |
+
+[Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py)  |  
+[Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py)  |  
+[Configuration train file training from scratch](../config/BelgiumTSscratch.py)
+
+Finally, in order to boos the performance of our network we have done data augmentation with horizontal flipping and bagging. 
+
+| Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Data augmentation  |     91.82    |         93.96       |
+| Bagging | 43.19  |  61.85  |
+
+[Configuration file data augmentation](../config/DataAugmentation.py) |  
+[Configuration file bagging](../config/Bagging.py)
+
 
 ## ResNet
 [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)

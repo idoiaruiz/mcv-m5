@@ -8,7 +8,7 @@ VGG architecture is a widely known convolutional neural network with outstanding
 
 We train VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we have evaluate different techniques in the configuration file to see how it affects to the behavior of the network.
 
-[Weights file]() | [Configuration file](../config/tt100ktrainVggCrop.py) | [Implementation](vgg.py)
+[Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvWXhNVXZpdER6ZzQ) | [Configuration file](../config/Vgg16.py) | [Implementation](vgg.py)
 
 In order to perform a good comparison of the crop technique with the resize one, first we have resized the image to 256,256 and then crop it to 224,224.
 
@@ -17,18 +17,17 @@ In order to perform a good comparison of the crop technique with the resize one,
 | Vgg16 resize     |     88.63    |         95.80        |
 | Vgg16 crop | 88.33 |   96.73  |
 
-[Configuration train file](../config/tt100ktrainVggCrop.py) |  
-[Configuration test file](../config/tt100ktestVggCrop.py)
+[Configuration file - train Vgg16 crop](../config/tt100ktrainVggCrop.py) | [Configuration file - test Vgg16 crop](../config/tt100ktestVggCrop.py) 
+| [Configuration file - Vgg16 resize](../config/Vgg16.py) 
 
-Then some pre-processing techniques were applied in order to normalize the data. In this case we have obtained a good result dividing the std from the dataset. Also we have tested to use the preprocess of imageNet, in this case we have obtained poor results maybe due to the number of epochs, we only have use 8, and it would need more.
+Then some pre-processing techniques were applied in order to normalize the data. In this case we have obtained a good results by dividing the std from the dataset and also we have tested the preprocess of imageNet.
 
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|
 | Division of the std from the dataset     |     92.01    |         96.11        |
-| ImageNet norm. |  |    |
+| ImageNet norm. | 70.52 |  91.67  |
 
-[Configuration file Std division from dataset](../config/tt100kNormalization.py) |  
-[Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
+[Configuration file Std division from dataset](../config/tt100kNormalization.py) |[Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
 
 Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we have trained from scratch VGG16 with BTSC dataset.
 
@@ -37,8 +36,7 @@ Once we have trained our VGG16 model with TT100K dataset we have use the corresp
 | Transfer learning from Tt100K dataset  |     97.10    |         97.10       |
 | Training from scratch | 96.03  |  95,91  |
 
-[Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py)  |  
-[Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py)  |  
+[Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py)  |  [Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py)  |  
 [Configuration train file training from scratch](../config/BelgiumTSscratch.py)
 
 Finally, in order to boos the performance of our network we have done data augmentation with horizontal flipping and bagging. 
@@ -48,8 +46,7 @@ Finally, in order to boos the performance of our network we have done data augme
 | Data augmentation  |     91.82    |         93.96       |
 | Bagging | 43.19  |  61.85  |
 
-[Configuration file data augmentation](../config/DataAugmentation.py) |  
-[Configuration file bagging](../config/Bagging.py)
+[Configuration file data augmentation](../config/DataAugmentation.py) | [Configuration file bagging](../config/Bagging.py)
 
 
 ## ResNet

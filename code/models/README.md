@@ -15,14 +15,26 @@ ResNet is a framework that comes from a modification of the common Convolutional
 
 The authors use this idea to create a new CNN architecture. They create a bottleneck architecture where each block (that corresponds to a residual function) has 1x1, 3x3 and 1x1 convolutional layers. Trying different depths, going from 50 up to 152 layers, and comparing this new architecture with the state-of-the-art architectures, as GoogleNet and VGG, the authors obtain a smaller test error using the 152-layer ResNet.
 ### Results
+ResNet model is trained from Scratch and with finetunning from the weights of Imagenet. It is seen how for the second case, the loss is not behaving properly. Thus, the learning rate is raise and the results improve. The model is build with the convolutional block from keras and with the fully connected block of the paper.
 
-[Weights file]() | [Configuration file]() | [Implementation](resnet.py)
+| Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| ResNet from scratch      |   90.34        |      92.53           |
+| ResNet with finetunning with Imagenet (LR = 0.0001) | 78.06 | 79.40     |
+| ResNet with finetunning with Imagenet (LR = 0.001) |  78.89   |   83.41   |
+
+[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CUkVGQnh5SVFCVVE) | [Configuration file]() | [Implementation](resnet.py)
 
 ## InceptionV3
 Rethinking the Inception Architecture for Computer Vision
 ### Results
+Inception V3 is trained from scratch and with finetunning from the weights of Imagenet. The model is build with the convolutional block from keras and with the fully connected block of the paper.
+| Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| InceptionV3 from scratch      |     94.82     |         97.39        |
+| InceptionV3 with finetunning with Imagenet | 92.13 |   98.14  |
 
-[Weights file]() | [Configuration file]() | [Implementation](inceptionV3.py)
+[Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CRjUzMHVkN01QUHM) | [Configuration file]() | [Implementation](inceptionV3.py)
 
 ## DenseNet
 [Densely Connected Convolutional Networks](https://arxiv.org/pdf/1608.06993.pdf)

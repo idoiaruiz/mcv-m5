@@ -27,7 +27,7 @@ Then some pre-processing techniques were applied in order to normalize the data.
 | Division of the std from the dataset     |     92.01    |         96.11        |
 | ImageNet norm. | 70.52 |  91.67  |
 
-[Configuration file Std division from dataset](../config/tt100kNormalization.py) |[Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
+[Configuration file Std division from dataset](../config/tt100kNormalization.py) | [Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
 
 Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we have trained from scratch VGG16 with BTSC dataset.
 
@@ -36,8 +36,7 @@ Once we have trained our VGG16 model with TT100K dataset we have use the corresp
 | Transfer learning from Tt100K dataset  |     97.10    |         97.10       |
 | Training from scratch | 96.03  |  95,91  |
 
-[Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py)  |  [Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py)  |  
-[Configuration train file training from scratch](../config/BelgiumTSscratch.py)
+[Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py) | [Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py) | [Configuration train file training from scratch](../config/BelgiumTSscratch.py)
 
 Finally, in order to boos the performance of our network we have done data augmentation with horizontal flipping and bagging. 
 

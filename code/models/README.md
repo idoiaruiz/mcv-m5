@@ -29,6 +29,7 @@ ResNet model is trained from Scratch and with finetunning from the weights of Im
 Rethinking the Inception Architecture for Computer Vision
 ### Results
 Inception V3 is trained from scratch and with finetunning from the weights of Imagenet. The model is build with the convolutional block from keras and with the fully connected block of the paper.
+
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|
 | InceptionV3 from scratch      |     94.82     |         97.39        |

@@ -6,7 +6,7 @@
 VGG architecture is a widely known convolutional neural network with outstanding results for image classification. It is based on very deep models (up to 19 layers) with small convolutional filters (3x3, 5x5 and even 1x1). On this work, several depths between 16 and 19 layers are evaluated with this small filters. In addition to the new architectures, the work is also focused on studying the effects of normalization (L2, batch normalization and local response normalization), the scaling of the image on training and testing time, the multicropping approach and the fusion of different models. Finally, the VGG model is also proved to worked for localization and to be applied for other datasets.
 ### Results
 
-We train VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we have evaluate different techniques in the configuration file to see how it affects to the behavior of the network.
+We have trained VGG16 with the preconfigured experiment file for the TT100K dataset obtaining a validation accuracy of 88.63 % and a test accuracy of 95.8%. After that, we have evaluated different techniques in the configuration file to see how it affects to the behavior of the network.
 
 [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvWXhNVXZpdER6ZzQ) | [Configuration file](../config/Vgg16.py) | [Implementation](vgg.py)
 
@@ -38,7 +38,7 @@ Once we have trained our VGG16 model with TT100K dataset we have use the corresp
 
 [Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py) | [Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py) | [Configuration train file training from scratch](../config/BelgiumTSscratch.py)
 
-Finally, in order to boos the performance of our network we have done data augmentation with horizontal flipping and bagging. 
+Finally, in order to boost the performance of our network we have done data augmentation with horizontal flipping and bagging. 
 
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|

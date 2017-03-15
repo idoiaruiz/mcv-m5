@@ -29,7 +29,8 @@ Then some pre-processing techniques are applied in order to normalize the data. 
 
 [Configuration file Std division from dataset](../config/tt100kNormalization.py) | [Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
 
-Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we train from scratch VGG16 with BTSC dataset.
+Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we train from scratch VGG16 with BTSC dataset. It was also trained from scratch for KITTI database, but since there was no test set, a proper evaluation was not performed.
+
 
 | BelgiumTS dataset and VGG16 | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|

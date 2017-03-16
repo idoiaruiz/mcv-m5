@@ -3,15 +3,17 @@ from keras import backend as K
 from keras.models import Model
 from keras.layers import Input, Convolution2D, MaxPooling2D, LeakyReLU, merge, Reshape
 
-def build_SSD(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
-               load_pretrained=False, weights_file, freeze_layers_from='base_model'):
 
-#Source: https://github.com/rykov8/ssd_keras
+def build_ssd(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
+              load_pretrained=False, weights_file,
+              freeze_layers_from='base_model'):
 
-    model = []
+# Source: https://github.com/rykov8/ssd_keras
+
+    model = SSD(img_shape, n_classes, n_priors)
 
     if load_pretrained:
-        model.load_weights(weights_file,by_name=True)
+        model.load_weights(weights_file, by_name=True)
 
     # Freeze some layers
     if freeze_layers_from is not None:
@@ -22,13 +24,14 @@ def build_SSD(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
         else:
             print ('   Freezing from layer 0 to ' + str(freeze_layers_from))
             for layer in model.layers[:freeze_layers_from]:
-               layer.trainable = False
+                layer.trainable = False
             for layer in model.layers[freeze_layers_from:]:
-               layer.trainable = True
+                layer.trainable = True
 
     return model
 
-def SSD(input_shape=(3,416,416),num_classes=80,num_priors=5):
+
+def SSD(input_shape=(3, 416, 416), num_classes=80, num_priors=5):
     net = {}
     # Block 1
     input_tensor = input_tensor = Input(shape=input_shape)

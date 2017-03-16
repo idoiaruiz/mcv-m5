@@ -10,7 +10,7 @@ from keras.layers import Reshape
 from layers.yolo_layers import YOLOConvolution2D,Reorg
 
 def build_yolo(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
-               load_pretrained=False,freeze_layers_from='base_model',
+               load_imageNet=False,freeze_layers_from='base_model',
                tiny=False):
 
     # YOLO model is only implemented for TF backend
@@ -26,7 +26,7 @@ def build_yolo(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
       model = TinyYOLO(input_shape=img_shape, num_classes=n_classes, num_priors=n_priors)
       base_model_layers = [layer.name for layer in model.layers[0:21]]
 
-    if load_pretrained:
+    if load_imageNet:
       # Rename last layer to not load pretrained weights
       model.layers[-1].name += '_new'
       if not tiny:

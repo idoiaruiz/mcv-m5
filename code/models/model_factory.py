@@ -14,6 +14,7 @@ from models.inceptionV3 import build_inceptionV3
 
 # Detection models
 from models.yolo import build_yolo
+from models.ssd import build_ssd
 
 # Segmentation models
 from models.fcn8 import build_fcn8
@@ -163,6 +164,12 @@ class Model_Factory():
                                cf.dataset.n_priors,
                                load_imageNet=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from, tiny=True)
+        elif cf.model_name == 'ssd':
+            model = build_ssd(in_shape, n_classes=cf.dataset.n_classes,
+                              n_priors=cf.dataset.n_priors,
+                              load_pretrained=cf.load_pretrained,
+                              weights_file=cf.weights_file,
+                              freeze_layers_from=cf.freeze_layers_from)
         else:
             raise ValueError('Unknown model')
 

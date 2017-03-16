@@ -1,11 +1,11 @@
-import numpy as np
 from keras import backend as K
 from keras.models import Model
-from keras.layers import Input, Convolution2D, MaxPooling2D, LeakyReLU, merge, Reshape
+from keras.layers import Activation, AtrousConvolution2D, Convolution2D, Dense, Flatten, GlobalAveragePooling2D, Input, MaxPooling2D, merge, Reshape, ZeroPadding2D
 
+from layers.ssd_layers import Normalize, PriorBox
 
-def build_ssd(img_shape=(3, 416, 416), n_classes=80, n_priors=5,
-              load_pretrained=False, weights_file,
+def build_ssd(img_shape=(3, 300, 300), n_classes=80, n_priors=5,
+              load_pretrained=False, weights_file='weights.hdf5',
               freeze_layers_from='base_model'):
 
 # Source: https://github.com/rykov8/ssd_keras

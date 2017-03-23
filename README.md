@@ -25,9 +25,9 @@ For the object recognition problem, we implement and test several architectures,
 1. Fix the paths for the datasets in [train.py](code/train.py) for working on your machine.
 
 2. Run the code
-   ```
-  python train.py -c config/dataset.py -e expName
-   ```
+```
+python train.py -c config/dataset.py -e expName
+```
    where ```dataset.py``` is the [configuration file](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#results) for this test, and ```expName``` is the name of the directory where the results are saved.
 
 ## Documents :clipboard:

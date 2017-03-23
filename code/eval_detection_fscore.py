@@ -44,7 +44,7 @@ else:
     tiny_yolo = False
 
 model = build_yolo(img_shape=input_shape,n_classes=NUM_CLASSES, n_priors=5,
-               load_pretrained=False,freeze_layers_from='base_model',
+               load_imageNet=False,freeze_layers_from='base_model',
                tiny=tiny_yolo)
 
 model.load_weights(sys.argv[1])

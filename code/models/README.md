@@ -91,3 +91,13 @@ We also test to apply Dropout layers after every convolutional layer setting the
 | DenseNet with Dropout (rate=0.2) | 68.31 | 64.84     |
 
 [Weights file (for the first result)](https://drive.google.com/file/d/0ByoayY6Lo-XTT1A2MjV5a0VTWlk/view?usp=sharing) | [Configuration file](../config/dense_tt100k_scratch.py) | [Implementation](densenetFCN.py)
+
+## Yolo
+[You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
+### Summary
+As other deep architectures for object detection need to look several times on the image, this architecture only needs to look one time at an image in order to find the objects in it. The architecture divides the image in a 7x7 grid and it passes each cell through a convolutional neural network in order to obtain a bounding box and a list of probabilities for all the classes.
+### Results
+
+## SSD
+### Summary
+### Results

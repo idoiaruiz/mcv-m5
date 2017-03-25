@@ -5,7 +5,7 @@ import numpy as np
 from keras.engine.training import GeneratorEnqueuer
 #from model_factory import Model_Factory
 from tools.save_images import save_img3
-from tools.yolo_utils import yolo_postprocess_net_out, BoundBox, box_iou
+from tools.yolo_utils import *
 from keras.preprocessing import image
 """
 Interface for normal (one net) models and adversarial models. Objects of
@@ -159,56 +159,56 @@ class One_Net_Model(Model):
                     img = img / 255.
                     inputs.append(img.copy())
                     img_paths.append(img_path)
-                if len(img_paths)%chunk_size == 0 or i+1 == len(imfiles):
-                    inputs = np.array(inputs)
-                    start_time_batch = time.time()
-                    net_out = self.model.predict(inputs, batch_size = 16, verbose = 1)
-                    print ('{} images predicted in {:.5f} seconds. {:.5f} fps').format(len(inputs), 
-                           time.time() - start_time_batch, 
-                                    (len(inputs)/(time.time() - start_time_batch)))
-                    # Find correct detections (per image)
-                    for i,img_path in enumerate(img_paths):
-                        boxes_pred = yolo_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
-                        boxes_true = []
-                        label_path = img_path.replace('jpg','txt')
-                        gt = np.loadtxt(label_path)
-                        if len(gt.shape) == 1:
-                            gt = gt[np.newaxis,]
-                        for j in range(gt.shape[0]):
-                            bx = BoundBox(len(classes))
-                            bx.probs[int(gt[j,0])] = 1.
-                            bx.x, bx.y, bx.w, bx.h = gt[j,1:].tolist()
-                            boxes_true.append(bx)
-                            
-                        total_true += len(boxes_true)
-                        true_matched = np.zeros(len(boxes_true))
-                        for b in boxes_pred:
-                            if b.probs[np.argmax(b.probs)] < detection_threshold:
-                                continue
-                            total_pred += 1.
-                            for t,a in enumerate(boxes_true):
-                                if true_matched[t]:
-                                    continue
-                                if box_iou(a, b) > 0.5 and np.argmax(a.probs) == np.argmax(b.probs):
-                                    true_matched[t] = 1
-                                    ok += 1.
-                                    break
-                                    
-                        # You can visualize/save per image results with this:
-                        #im = cv2.imread(img_path)
-                        #im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)
-                        #cv2.imshow('', im)
-                        #cv2.waitKey(0)
-                    inputs = []
-                    img_paths = []
                     
-                    #print 'total_true:',total_true,' total_pred:',total_pred,' ok:',ok
-                    p = 0. if total_pred == 0 else (ok/total_pred)
-                    r = ok/total_true
-                    print('Precission = ' + str(p))
-                    print('Recall     = ' + str(r))
-                    f = 0. if (p + r) == 0 else (2*p*r/(p + r))
-                    print('F-score    = '+str(f))
+                    if len(img_paths)%chunk_size == 0 or i+1 == len(imfiles):
+                        inputs = np.array(inputs)
+                        start_time_batch = time.time()
+                        net_out = self.model.predict(inputs, batch_size = 16, verbose = 1)
+                        print ('{} images predicted in {:.5f} seconds. {:.5f} fps').format(len(inputs), 
+                               time.time() - start_time_batch, 
+                                (len(inputs)/(time.time() - start_time_batch)))
+                        # Find correct detections (per image)
+                        for i, img_path in enumerate(img_paths):
+                            boxes_pred = yolo_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
+                            boxes_true = []
+                            label_path = img_path.replace('jpg','txt')
+                            gt = np.loadtxt(label_path)
+                            if len(gt.shape) == 1:
+                                gt = gt[np.newaxis,]
+                            for j in range(gt.shape[0]):
+                                bx = BoundBox(len(classes))
+                                bx.probs[int(gt[j,0])] = 1.
+                                bx.x, bx.y, bx.w, bx.h = gt[j,1:].tolist()
+                                boxes_true.append(bx)
+                            
+                            total_true += len(boxes_true)
+                            true_matched = np.zeros(len(boxes_true))
+                            for b in boxes_pred:
+                                if b.probs[np.argmax(b.probs)] < detection_threshold:
+                                    continue
+                                total_pred += 1.
+                                for t,a in enumerate(boxes_true):
+                                    if true_matched[t]:
+                                        continue
+                                    if box_iou(a, b) > 0.5 and np.argmax(a.probs) == np.argmax(b.probs):
+                                        true_matched[t] = 1
+                                        ok += 1.
+                                        break
+                            # You can visualize/save per image results with this:
+                            #im = cv2.imread(img_path)
+                            #im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)
+                            #cv2.imshow('', im)
+                            #cv2.waitKey(0)
+                        inputs = []
+                        img_paths = []
+                    
+                        #print 'total_true:',total_true,' total_pred:',total_pred,' ok:',ok
+                        p = 0. if total_pred == 0 else (ok/total_pred)
+                        r = ok/total_true
+                        print('Precission = ' + str(p))
+                        print('Recall     = ' + str(r))
+                        f = 0. if (p + r) == 0 else (2*p*r/(p + r))
+                        print('F-score    = '+str(f))
     
     
 ############################End new code   

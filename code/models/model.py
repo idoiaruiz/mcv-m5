@@ -116,7 +116,7 @@ class One_Net_Model(Model):
                                                          max_q_size=10,
                                                          nb_worker=1,
                                                          pickle_safe=False)
-#############Begin new code
+
             if self.cf.problem_type == 'detection':
                 # Dataset and the model used
                 dataset_name = self.cf.dataset_name 
@@ -211,7 +211,7 @@ class One_Net_Model(Model):
                         print('F-score    = '+str(f))
     
     
-############################End new code   
+
             total_time_global = time.time() - start_time_global
             fps = float(self.cf.dataset.n_images_test) / total_time_global
             s_p_f = total_time_global / float(self.cf.dataset.n_images_test)

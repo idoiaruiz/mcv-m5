@@ -96,12 +96,12 @@ We also test to apply Dropout layers after every convolutional layer setting the
 [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
 ### Summary
 As other deep architectures for object detection need to look several times on the image, this architecture only needs to look one time at an image in order to find the objects in it. The architecture divides the image in a 7x7 grid and it passes each cell through a convolutional neural network in order to obtain a bounding box and a list of probabilities for all the classes.
+
 ### Results
+We train Yolo with the preconfigured experiment file for the TT100K and Udacity datasets. After that, we evaluate, for both datasets, different techniques in the configuration file to see how it affects to the behavior of the network. All the results can be seen the following tables.
 
 #### TT100K Dataset
-We first train Yolo with the preconfigured experiment file for the TT100K dataset. After that, we evaluate different techniques in the configuration file to see how it affects to the behavior of the network. All the results can be seen the following table.
-
-[Weights file for Yolo and TT100K Dataset](https://drive.google.com/open?id=0B06nnAKc0eZvZmpiaFRHbXI4Vzg) | [Configuration file Yolo](../config/yoloBaselineTt100k.py) | [Implementation](yolo.py)
+[Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvZmpiaFRHbXI4Vzg) | [Configuration file](../config/yoloBaselineTt100k.py) | [Implementation](yolo.py)
 
 
 |  | Precission (%) | Recall (%) | F-score(%) |
@@ -109,19 +109,18 @@ We first train Yolo with the preconfigured experiment file for the TT100K datase
 |Baseline|    80.78   | 60.57         |      69.23           |
 |Tiny Yolo|  53.29 | 27.04 | 35.88     |
 |Horizontal and Vertical shift (20%)|  74.36 | 61.04 | 67.04     |
-|Data augmentation (Horizontal flip)|  81.60 | 67.30 | 73.76     |
+|Horizontal flip|  81.60 | 67.30 | 73.76     |
 |Feature Normalization|  81.02 | 69.20 | 74.65     |
-|Data augmentation and feature norm.|  84.89 | 71.83 | 77.81     |
+|Horizontal flip and feature norm.|  84.89 | 71.83 | 77.81     |
 
 [Configuration file Baseline](../config/yoloBaselineTt100k.py) |
 [Configuration file Tiny Yolo](../config/TinyyoloTt100k.py) |
 [Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftTt100k.py) |
-[Configuration file Data augmentation](../config/yoloDataAugTt100k.py) |
+[Configuration file Horizontal flip](../config/yoloDataAugTt100k.py) |
 [Configuration file Feature normalization](../config/yoloFeatNormTt100k.py) |
-[Configuration file Data augmentation and feature norm.](../config/yoloDataAugFeatNormTt100k.py)
+[Configuration file Horizontal flip and feature norm.](../config/yoloDataAugFeatNormTt100k.py)
 
 #### Udacity Dataset
-We first train Yolo with the preconfigured experiment file for the Udacity dataset. After that, we evaluate different techniques in the configuration file to see how it affects to the behavior of the network. All the results can be seen the following table.
 
 
 

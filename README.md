@@ -19,8 +19,12 @@ For the object recognition problem, we implement and test several architectures,
  - [x] Try several pre-processing methods for the TT100K dataset with VGG model.
  - [x] Evaluate crop vs resize for the input images for the VGG model with TT100K dataset.
  - [x] Boost the performance of the VGG model using data augmentation, bagging as well as optimizing the hyperparameters.
-
-
+### Object detection
+To perform the task of object detection, we have used two different architectures: Yolov2 and SSD. We perform several experiments with this architectures using different datasets and different configurations to boost the performance of the networks.
+- [x] Implement SSD architecture and train it.
+- [x] Train Yolov2 and and smaller version (tiny yolo) in TT100K and Udacity datasets from scratch.
+- [x] Boost the performance of the Yolov2 architecture with preprocessing and data augmentation.
+- [x] Improve the performance of Yolov2 with Udacity dataset solving the problem of the different lightness in images.
 ## Usage :computer:
 1. Fix the paths for the datasets in [train.py](code/train.py) for working on your machine.
 

@@ -122,6 +122,22 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 #### Udacity Dataset
 
+|  | Precission (%) | Recall (%) | F-score(%) |
+|-------------| ------------- | ------------- |----------------------|
+|Baseline|    51.05   | 28.69         |      36.74           |
+|Tiny Yolo|  11.02 | 4.11 | 5.98     |
+|Horizontal and Vertical shift (20%)|  53.35 | 32.98 | 40.76     |
+|Horizontal flip|  35.76 | 22.51 | 27.63     |
+|Feature Normalization|  40.17 | 25.06 | 30.87     |
+|Horizontal flip and feature norm.|  40.59 | 22.23 | 28.72     |
+
+[Configuration file Baseline](../config/yoloBaselineUdacity.py) |
+[Configuration file Tiny Yolo](../config/TinyyoloUdacity.py) |
+[Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftUdacity.py) |
+[Configuration file Horizontal flip](../config/yoloDataAugUdacity.py) |
+[Configuration file Feature normalization](../config/yoloFeatNormUdacity.py) |
+[Configuration file Horizontal flip and feature norm.](../config/yoloDataAugFeatNormUdacity.py)
+
 
 
 ## SSD

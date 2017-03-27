@@ -24,6 +24,7 @@ from keras.preprocessing.image import (Iterator,
 
 from tools.save_images import save_img2
 from tools.yolo_utils import yolo_build_gt_batch
+from tools.ssd_utils import BBoxUtility
 
 # Pad image
 def pad_image(x, pad_amount, mode='reflect', constant=0.):
@@ -218,6 +219,7 @@ class ImageDataGenerator(object):
                  warp_grid_size=3,
                  dim_ordering='default',
                  class_mode='categorical',
+                 model_name=None,
                  rgb_mean=None,
                  rgb_std=None,
                  crop_size=None):
@@ -228,6 +230,7 @@ class ImageDataGenerator(object):
         # self.rescale = rescale
         self.preprocessing_function = preprocessing_function
         self.cb_weights = None
+        self.model_name = model_name
 
         if dim_ordering not in {'tf', 'th'}:
             raise Exception('dim_ordering should be "tf" (channel after row '
@@ -300,7 +303,7 @@ class ImageDataGenerator(object):
             batch_size=batch_size, shuffle=shuffle, seed=seed,
             gt_directory=gt_directory,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
-            save_format=save_format)
+            save_format=save_format, model_name=self.model_name)
 
     def flow_from_directory2(self, directory,
                              resize=None, target_size=(256, 256),
@@ -321,7 +324,7 @@ class ImageDataGenerator(object):
             save_to_dir=save_to_dir, save_prefix=save_prefix,
             save_format=save_format,
             directory2=directory2, gt_directory2=gt_directory2,
-            batch_size2=batch_size2)
+            batch_size2=batch_size2, model_name=self.model_name)
 
     def standardize(self, x, y=None):
         if self.imageNet:
@@ -502,7 +505,7 @@ class ImageDataGenerator(object):
                         x1,y1,x2,y2 = b.astype(int)[ii]
                         # get the four edge points of the bounding box
                         v1 = np.array([y1,x1,1])
-                        v2 = np.array([y2,x2,1]) 
+                        v2 = np.array([y2,x2,1])
                         v3 = np.array([y2,x1,1])
                         v4 = np.array([y1,x2,1])
                         # transform the 4 points
@@ -511,10 +514,10 @@ class ImageDataGenerator(object):
                         v3 = np.dot(p_transform_matrix, v3)
                         v4 = np.dot(p_transform_matrix, v4)
                         # compute the new bounding box edges
-                        b[ii,0] = np.min([v1[1],v2[1],v3[1],v4[1]]) 
+                        b[ii,0] = np.min([v1[1],v2[1],v3[1],v4[1]])
                         b[ii,1] = np.min([v1[0],v2[0],v3[0],v4[0]])
                         b[ii,2] = np.max([v1[1],v2[1],v3[1],v4[1]])
-                        b[ii,3] = np.max([v1[0],v2[0],v3[0],v4[0]]) 
+                        b[ii,3] = np.max([v1[0],v2[0],v3[0],v4[0]])
 
         if self.channel_shift_range != 0:
             x = random_channel_shift(x, self.channel_shift_range,
@@ -840,7 +843,7 @@ class DirectoryIterator(Iterator):
                  dim_ordering='default',
                  classes=None, class_mode='categorical',
                  batch_size=32, shuffle=True, seed=None, gt_directory=None,
-                 save_to_dir=None, save_prefix='', save_format='jpeg'):
+                 save_to_dir=None, save_prefix='', save_format='jpeg', model_name=None):
         # Check dim order
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
@@ -853,6 +856,7 @@ class DirectoryIterator(Iterator):
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
+        self.model_name = model_name
 
         # Check target size
         if target_size is None and batch_size > 1:
@@ -1045,9 +1049,15 @@ class DirectoryIterator(Iterator):
             for i, label in enumerate(self.classes[index_array]):
                 batch_y[i, label] = 1.
         elif self.class_mode == 'detection':
-            # TODO detection: check model, other networks may expect a different batch_y format and shape
-            # YOLOLoss expects a particular batch_y format and shape
-            batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+            if self.model_name == 'ssd':
+                bbox_util = BBoxUtility(self.nb_class)
+                batch_y = bbox_util.ssd_build_gt_batch(batch_y)
+            elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
+                # TODO detection: check model, other networks may expect a different batch_y format and shape
+                # YOLOLoss expects a particular batch_y format and shape
+                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+            else:
+                print('Unknown detection model')
         elif self.class_mode == None:
             return batch_x
 

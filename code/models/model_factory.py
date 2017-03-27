@@ -51,14 +51,16 @@ class Model_Factory():
             loss = 'categorical_crossentropy'
             metrics = ['accuracy']
         elif cf.dataset.class_mode == 'detection':
-            in_shape = (cf.dataset.n_channels,
-                        cf.target_size_train[0],
-                        cf.target_size_train[1])
-            # TODO detection : check model, different detection nets may have different losses and metrics
             if cf.model_name == 'ssd':
+                in_shape = (cf.target_size_train[0],
+                            cf.target_size_train[1],
+                            cf.dataset.n_channels,)
                 loss = MultiboxLoss(cf.dataset.n_classes, neg_pos_ratio=2.0).compute_loss
                 metrics = None
             else: # YOLO
+                in_shape = (cf.dataset.n_channels,
+                            cf.target_size_train[0],
+                            cf.target_size_train[1])
                 loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
                 metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors)]
         elif cf.dataset.class_mode == 'segmentation':
@@ -170,7 +172,7 @@ class Model_Factory():
                                load_imageNet=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from, tiny=True)
         elif cf.model_name == 'ssd':
-            model = build_ssd(in_shape, cf.dataset.n_classes,
+            model = build_ssd(in_shape, cf.dataset.n_classes+1,
                               cf.dataset.n_priors,
                               load_pretrained=cf.load_pretrained,
                               weights_file=cf.weights_file,

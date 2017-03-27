@@ -6,6 +6,7 @@ from keras.engine.training import GeneratorEnqueuer
 #from model_factory import Model_Factory
 from tools.save_images import save_img3
 from tools.yolo_utils import *
+from tools.ssd_utils import ssd_postprocess_net_out
 from keras.preprocessing import image
 """
 Interface for normal (one net) models and adversarial models. Objects of
@@ -169,7 +170,10 @@ class One_Net_Model(Model):
                                 (len(inputs)/(time.time() - start_time_batch)))
                         # Find correct detections (per image)
                         for i, img_path in enumerate(img_paths):
-                            boxes_pred = yolo_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
+                            if self.cf.model_name == 'ssd:
+                                boxes_pred = ssd_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
+                            else:    
+                                boxes_pred = yolo_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
                             boxes_true = []
                             label_path = img_path.replace('jpg','txt')
                             gt = np.loadtxt(label_path)

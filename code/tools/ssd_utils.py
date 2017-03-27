@@ -5,6 +5,7 @@ import tensorflow as tf
 import pickle
 import urllib
 import os
+import math
 
 class BBoxUtility(object):
     """Utility class to do some stuff with bounding boxes and priors.
@@ -253,3 +254,61 @@ class BBoxUtility(object):
                 y_box[j][4+int(batch_y[i][j][0])] = 1
             batch_y[i] = self.assign_boxes(y_box)
         return np.asarray(batch_y)
+
+def expit(x):
+	return 1. / (1. + np.exp(-x))
+
+def _softmax(x):
+    e_x = np.exp(x - np.max(x))
+    out = e_x / e_x.sum()
+    return out
+
+class BoundBox:
+    def __init__(self, classes):
+        self.x, self.y = float(), float()
+        self.w, self.h = float(), float()
+        self.c = float()
+        self.class_num = classes
+        self.probs = np.zeros((classes,))
+        
+def prob_compare(box):
+    return box.probs[box.class_num]
+
+def ssd_postprocess_net_out(net_out, anchors, labels, threshold, nms_threshold):
+    print(net_out.shape) 
+    C = len(labels) 
+    B = len(anchors)
+    net_out = np.transpose(net_out, (1,2,0))
+    H,W = net_out.shape[:2]
+    net_out = net_out.reshape([H, W, B, -1])
+
+    boxes = list()
+    for row in range(H):
+		for col in range(W):
+			for b in range(B):
+				bx = BoundBox(C)
+				bx.x, bx.y, bx.w, bx.h, bx.c = net_out[row, col, b, :5]
+				bx.c = expit(bx.c)
+				bx.x = (col + expit(bx.x)) / W
+				bx.y = (row + expit(bx.y)) / H
+				bx.w = math.exp(bx.w) * anchors[b][0] / W
+				bx.h = math.exp(bx.h) * anchors[b][1] / H
+				classes = net_out[row, col, b, 5:]
+				bx.probs = _softmax(classes) * bx.c
+				bx.probs *= bx.probs > threshold
+				boxes.append(bx)
+
+	# non max suppress boxes
+	for c in range(C):
+		for i in range(len(boxes)):
+			boxes[i].class_num = c
+		boxes = sorted(boxes, key = prob_compare)
+		for i in range(len(boxes)):
+			boxi = boxes[i]
+			if boxi.probs[c] == 0: continue
+			for j in range(i + 1, len(boxes)):
+				boxj = boxes[j]
+				if box_iou(boxi, boxj) >= nms_threshold:
+					boxes[j].probs[c] = 0.
+
+	return boxes

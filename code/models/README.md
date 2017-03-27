@@ -104,16 +104,16 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvZmpiaFRHbXI4Vzg) | [Configuration file](../config/yoloBaselineTt100k.py) | [Implementation](yolo.py)
 
 
-|  | Precission (%) | Recall (%) | F-score(%) |
-|-------------| ------------- | ------------- |----------------------|
-|Baseline|    80.78   | 60.57         |      69.23           |
-|Tiny Yolo|  53.29 | 27.04 | 35.88     |
-|Horizontal and Vertical shift (20%)|  74.36 | 61.04 | 67.04     |
-|Horizontal flip|  81.60 | 67.30 | 73.76     |
-|Feature Normalization|  81.02 | 69.20 | 74.65     |
-|Horizontal flip and feature norm.|  84.89 | 71.83 | 77.81     |
+|  | Precission (%) | Recall (%) | F-score(%) | FPS |
+|-------------| ------------- | ------------- |----------------------|----------------------|
+|Yolo|    80.78   | 60.57         |      69.23           | 19.90 |
+|Tiny Yolo|  53.29 | 27.04 | 35.88     | 31.76 |
+|Horizontal and Vertical shift (20%)|  74.36 | 61.04 | 67.04     | 19.65 |
+|Horizontal flip|  81.60 | 67.30 | 73.76     | 19.76 |
+|Feature Normalization|  81.02 | 69.20 | 74.65     | 19.90 |
+|Horizontal flip and feature norm.|  84.89 | 71.83 | 77.81     | 19.78 |
 
-[Configuration file Baseline](../config/yoloBaselineTt100k.py) |
+[Configuration file Yolo](../config/yoloBaselineTt100k.py) |
 [Configuration file Tiny Yolo](../config/TinyyoloTt100k.py) |
 [Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftTt100k.py) |
 [Configuration file Horizontal flip](../config/yoloDataAugTt100k.py) |
@@ -122,16 +122,20 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 #### Udacity Dataset
 
-|  | Precission (%) | Recall (%) | F-score(%) |
-|-------------| ------------- | ------------- |----------------------|
-|Baseline|    51.05   | 28.69         |      36.74           |
-|Tiny Yolo|  11.02 | 4.11 | 5.98     |
-|Horizontal and Vertical shift (20%)|  53.35 | 32.98 | 40.76     |
-|Horizontal flip|  35.76 | 22.51 | 27.63     |
-|Feature Normalization|  40.17 | 25.06 | 30.87     |
-|Horizontal flip and feature norm.|  40.59 | 22.23 | 28.72     |
+[Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvSTlQQVdqdjFqLTQ) [Configuration file](../config/yoloBaselineUdacity.py) | [Implementation](yolo.py)
 
-[Configuration file Baseline](../config/yoloBaselineUdacity.py) |
+
+
+|  | Precission (%) | Recall (%) | F-score(%) | FPS |
+|-------------| ------------- | ------------- |----------------------|----------------------|
+|Yolo|    51.05   | 28.69         |      36.74           | 20.00 |
+|Tiny Yolo|  11.02 | 4.11 | 5.98     | 32.00 |
+|Horizontal and Vertical shift (20%)|  53.35 | 32.98 | 40.76     | 19.84 |
+|Horizontal flip|  35.76 | 22.51 | 27.63     | 19.94 |
+|Feature Normalization|  40.17 | 25.06 | 30.87     | 19.84 |
+|Horizontal flip and feature norm.|  40.59 | 22.23 | 28.72     | 19.89 |
+
+[Configuration file Yolo](../config/yoloBaselineUdacity.py) |
 [Configuration file Tiny Yolo](../config/TinyyoloUdacity.py) |
 [Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftUdacity.py) |
 [Configuration file Horizontal flip](../config/yoloDataAugUdacity.py) |

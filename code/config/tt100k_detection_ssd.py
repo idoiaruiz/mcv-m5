@@ -14,11 +14,11 @@ weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
 train_model                  = True            # Train the model
-test_model                   = True            # Test the model
+test_model                   = False            # Test the model
 pred_model                   = False            # Predict using the model
 
 # Debug
-debug                        = True           # Use only few images for debuging
+debug                        = False           # Use only few images for debuging
 debug_images_train           = 16              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 16              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 16              # N images for testing in debug mode (-1 means all)
@@ -47,7 +47,7 @@ seed_test                    = 1924            # Random seed for the testing shu
 optimizer                    = 'rmsprop'       # Optimizer
 learning_rate                = 0.00001         # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
-n_epochs                     = 5              # Number of epochs during training
+n_epochs                     = 10              # Number of epochs during training
 
 # Callback save results
 save_results_enabled         = False           # Enable the Callback
@@ -71,7 +71,7 @@ checkpoint_save_weights_only = True            # Save only weights or also model
 checkpoint_verbose           = 1               # Verbosity of the checkpoint
 
 # Callback plot
-plotHist_enabled             = True            # Enable the Callback
+plotHist_enabled             = False            # Enable the Callback
 plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler

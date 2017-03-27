@@ -122,7 +122,7 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 #### Udacity Dataset
 
-[Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvSTlQQVdqdjFqLTQ) [Configuration file](../config/yoloBaselineUdacity.py) | [Implementation](yolo.py)
+[Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvSTlQQVdqdjFqLTQ) |[Configuration file](../config/yoloBaselineUdacity.py) | [Implementation](yolo.py)
 
 
 

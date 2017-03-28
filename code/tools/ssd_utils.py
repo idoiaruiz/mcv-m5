@@ -274,41 +274,86 @@ class BoundBox:
 def prob_compare(box):
     return box.probs[box.class_num]
 
-def ssd_postprocess_net_out(net_out, anchors, labels, threshold, nms_threshold):
-    print(net_out.shape) 
-    C = len(labels) 
-    B = len(anchors)
-    net_out = np.transpose(net_out, (1,2,0))
-    H,W = net_out.shape[:2]
-    net_out = net_out.reshape([H, W, B, -1])
+def overlap(x1,w1,x2,w2):
+    l1 = x1 - w1 / 2.;
+    l2 = x2 - w2 / 2.;
+    left = max(l1, l2)
+    r1 = x1 + w1 / 2.;
+    r2 = x2 + w2 / 2.;
+    right = min(r1, r2)
+    return right - left;
+
+def box_intersection(a, b):
+    w = overlap(a.x, a.w, b.x, b.w);
+    h = overlap(a.y, a.h, b.y, b.h);
+    if w < 0 or h < 0: return 0;
+    area = w * h;
+    return area;
+
+def box_union(a, b):
+    i = box_intersection(a, b);
+    u = a.w * a.h + b.w * b.h - i;
+    return u;
+
+def box_iou(a, b):
+    return box_intersection(a, b) / box_union(a, b);
+
+def ssd_postprocess_net_out(net_out, labels, threshold, nms_threshold):
+    num_classes = len(labels)
+    bbox_util_ssd = BBoxUtility(num_classes = num_classes, priors = None, overlap_threshold = 0.5,
+                 nms_thresh = nms_threshold)
+    results = bbox_util_ssd.detection_out(net_out, background_label_id = 0, keep_top_k = 200,
+                      confidence_threshold = 0.01)
+
+    #[label, confidence, xmin, ymin, xmax, ymax]
+    
+#    C = len(labels) 
+#    B = len(anchors)
+#    net_out = np.transpose(net_out, (1,2,0))
+#    H,W = net_out.shape[:2]
+#    net_out = net_out.reshape([H, W, B, -1])
 
     boxes = list()
-    for row in range(H):
-		for col in range(W):
-			for b in range(B):
-				bx = BoundBox(C)
-				bx.x, bx.y, bx.w, bx.h, bx.c = net_out[row, col, b, :5]
-				bx.c = expit(bx.c)
-				bx.x = (col + expit(bx.x)) / W
-				bx.y = (row + expit(bx.y)) / H
-				bx.w = math.exp(bx.w) * anchors[b][0] / W
-				bx.h = math.exp(bx.h) * anchors[b][1] / H
-				classes = net_out[row, col, b, 5:]
-				bx.probs = _softmax(classes) * bx.c
-				bx.probs *= bx.probs > threshold
-				boxes.append(bx)
+    boxes_im = list()
+    for im in range(len(results)):
+        for pred in range(len(results[im])):
+            bx = BoundBox(num_classes)
+            bx.x = results[im][pred][2]
+            bx.y = results[im][pred][3]
+            bx.w = results[im][pred][4] - results[im][pred][2]
+            bx.w = results[im][pred][5] - results[im][pred][3]
+            
+            bx.c = expit(bx.c)#Good or wrong?
+            bx.class_num = results[im][pred][0]
+#            self.x, self.y = float(), float()
+#            self.w, self.h = float(), float()
+#            self.c = float()
+#            self.class_num = classes
+#            self.probs = np.zeros((classes,))
+            
+            
+#            bx.x = (col + expit(bx.x)) / W
+#            bx.y = (row + expit(bx.y)) / H
+#            bx.w = math.exp(bx.w) * anchors[b][0] / W
+#            bx.h = math.exp(bx.h) * anchors[b][1] / H
+#            classes = net_out[row, col, b, 5:]
+            bx.probs = results[im][pred][1]
+            bx.probs *= bx.probs > threshold
+            
+            
+            boxes_im.append(bx)
+        boxes.append(boxes_im)
+#	# non max suppress boxes
+#    for c in range(C):
+#        for i in range(len(boxes)):
+#            boxes[i].class_num = c
+#        boxes = sorted(boxes, key = prob_compare)
+#        for i in range(len(boxes)):
+#            boxi = boxes[i]
+#            if boxi.probs[c] == 0: continue
+#            for j in range(i + 1, len(boxes)):
+#                boxj = boxes[j]
+#                if box_iou(boxi, boxj) >= nms_threshold:
+#                    boxes[j].probs[c] = 0.
 
-	# non max suppress boxes
-	for c in range(C):
-		for i in range(len(boxes)):
-			boxes[i].class_num = c
-		boxes = sorted(boxes, key = prob_compare)
-		for i in range(len(boxes)):
-			boxi = boxes[i]
-			if boxi.probs[c] == 0: continue
-			for j in range(i + 1, len(boxes)):
-				boxj = boxes[j]
-				if box_iou(boxi, boxj) >= nms_threshold:
-					boxes[j].probs[c] = 0.
-
-	return boxes
+    return boxes

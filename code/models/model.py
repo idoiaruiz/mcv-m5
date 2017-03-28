@@ -151,6 +151,7 @@ class One_Net_Model(Model):
                 img_paths = []
                 chunk_size = 128 # we are going to process all image files in chunks
                 
+                
                 ok = 0.
                 total_true = 0.
                 total_pred = 0.
@@ -168,10 +169,14 @@ class One_Net_Model(Model):
                         print ('{} images predicted in {:.5f} seconds. {:.5f} fps').format(len(inputs), 
                                time.time() - start_time_batch, 
                                 (len(inputs)/(time.time() - start_time_batch)))
+                        
+                        if self.cf.model_name == 'ssd':
+                            batch_boxes = ssd_postprocess_net_out(net_out, classes, detection_threshold, nms_threshold)
+                        
                         # Find correct detections (per image)
                         for i, img_path in enumerate(img_paths):
-                            if self.cf.model_name == 'ssd:
-                                boxes_pred = ssd_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
+                            if self.cf.model_name == 'ssd':
+                                boxes_pred = batch_boxes[i]
                             else:    
                                 boxes_pred = yolo_postprocess_net_out(net_out[i], priors, classes, detection_threshold, nms_threshold)
                             boxes_true = []
@@ -179,22 +184,36 @@ class One_Net_Model(Model):
                             gt = np.loadtxt(label_path)
                             if len(gt.shape) == 1:
                                 gt = gt[np.newaxis,]
+                            #Transform gt into BoundBox format    
                             for j in range(gt.shape[0]):
                                 bx = BoundBox(len(classes))
                                 bx.probs[int(gt[j,0])] = 1.
-                                bx.x, bx.y, bx.w, bx.h = gt[j,1:].tolist()
+                                bx.x, bx.y, bx.w, bx.h = gt[j, 1:].tolist()
                                 boxes_true.append(bx)
                             
                             total_true += len(boxes_true)
                             true_matched = np.zeros(len(boxes_true))
+                            #Compare each predicted box with the boxes of gt
                             for b in boxes_pred:
-                                if b.probs[np.argmax(b.probs)] < detection_threshold:
+                                
+                                if self.cf.model_name == 'ssd':
+                                    b_probs_np_argmax_b_probs = b.probs
+                                    np_argmax_b_probs = b.class_num
+                                else:    
+                                    b_probs_np_argmax_b_probs = b.probs[np.argmax(b.probs)]
+                                    np_argmax_b_probs = np.argmax(b.probs)
+                                    
+                                if b_probs_np_argmax_b_probs < detection_threshold:
                                     continue
                                 total_pred += 1.
-                                for t,a in enumerate(boxes_true):
+                                for t, a in enumerate(boxes_true):
                                     if true_matched[t]:
                                         continue
-                                    if box_iou(a, b) > 0.5 and np.argmax(a.probs) == np.argmax(b.probs):
+                                    if self.cf.model_name == 'ssd':
+                                        np_argmax_a_probs = a.class_num
+                                    else:    
+                                        np_argmax_a_probs = np.argmax(a.probs)
+                                    if box_iou(a, b) > 0.5 and np_argmax_a_probs == np_argmax_b_probs:
                                         true_matched[t] = 1
                                         ok += 1.
                                         break
@@ -220,10 +239,12 @@ class One_Net_Model(Model):
             fps = float(self.cf.dataset.n_images_test) / total_time_global
             s_p_f = total_time_global / float(self.cf.dataset.n_images_test)
             print ('   Testing time: {}. FPS: {}. Seconds per Frame: {}'.format(total_time_global, fps, s_p_f))
-            metrics_dict = dict(zip(self.model.metrics_names, test_metrics))
-            print ('   Test metrics: ')
-            for k in metrics_dict.keys():
-                print ('      {}: {}'.format(k, metrics_dict[k]))
+            
+            if not(self.cf.model_name == 'ssd'):
+                metrics_dict = dict(zip(self.model.metrics_names, test_metrics))
+                print ('   Test metrics: ')
+                for k in metrics_dict.keys():
+                    print ('      {}: {}'.format(k, metrics_dict[k]))
 
             if self.cf.problem_type == 'segmentation':
                 # Compute Jaccard per class

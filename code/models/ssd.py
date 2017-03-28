@@ -4,6 +4,7 @@ from keras.layers import Activation, AtrousConvolution2D, Convolution2D, Dense, 
 
 from layers.ssd_layers import Normalize, PriorBox
 
+
 def build_ssd(img_shape=(3, 300, 300), n_classes=80, n_priors=5,
               load_pretrained=False, weights_file='weights.hdf5',
               freeze_layers_from='base_model'):
@@ -18,9 +19,7 @@ def build_ssd(img_shape=(3, 300, 300), n_classes=80, n_priors=5,
     # Freeze some layers
     if freeze_layers_from is not None:
         if freeze_layers_from == 'base_model':
-            for layer in model.layers:
-                if layer.name in base_model_layers:
-                    layer.trainable = False
+            raise ValueError('Please enter the layer id, instead of "base_model" for the "freeze_layers_from" config parameter')
         else:
             print ('   Freezing from layer 0 to ' + str(freeze_layers_from))
             for layer in model.layers[:freeze_layers_from]:

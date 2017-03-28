@@ -17,8 +17,8 @@ In order to perform a good comparison of the crop technique with the resize one,
 | Vgg16 resize     |     88.63    |         95.80        |
 | Vgg16 crop | 88.33 |   96.73  |
 
-[Configuration file - train Vgg16 crop](../config/tt100ktrainVggCrop.py) | [Configuration file - test Vgg16 crop](../config/tt100ktestVggCrop.py) 
-| [Configuration file - Vgg16 resize](../config/Vgg16.py) 
+[Configuration file - train Vgg16 crop](../config/tt100ktrainVggCrop.py) | [Configuration file - test Vgg16 crop](../config/tt100ktestVggCrop.py)
+| [Configuration file - Vgg16 resize](../config/Vgg16.py)
 
 Then some pre-processing techniques are applied in order to normalize the data. In this case we obtain good results by dividing the std from the dataset and also we test the preprocess of imageNet.
 
@@ -29,7 +29,7 @@ Then some pre-processing techniques are applied in order to normalize the data. 
 
 [Configuration file Std division from dataset](../config/tt100kNormalization.py) | [Configuration file ImageNet norm.](../config/tt100kImageNetNormalization.py)
 
-Once we have trained our VGG16 model with TT100K dataset we have use the correspondent weights with the BelgiumTSC dataset. Also we train from scratch VGG16 with BTSC dataset. It was also trained from scratch for KITTI database, but since there was no test set, a proper evaluation was not performed.
+Once we have trained the VGG16 model with the TT100K dataset, we use those trained weights with the BelgiumTSC dataset. We also train VGG16 from scratch with the BTSC dataset, as well as for the KITTI database, although we do not have evaluation results for KITTI since there was no test set available.
 
 
 | BelgiumTS dataset and VGG16 | Validation accuracy (%) |Test accuracy (%)|
@@ -39,7 +39,7 @@ Once we have trained our VGG16 model with TT100K dataset we have use the corresp
 
 [Configuration file transfer learning from Tt100K dataset-train ](../config/transferLearningtrain.py) | [Configuration file transfer learning from Tt100K dataset-test ](../config/transferLearningtest.py) | [Configuration train file training from scratch](../config/BelgiumTSscratch.py)
 
-Finally, in order to boost the performance of our network we have done data augmentation with horizontal flipping and bagging. 
+Finally, in order to boost the performance of our network we have done data augmentation with horizontal flipping and bagging.
 
 | Train with TT100K dataset | Validation accuracy (%) |Test accuracy (%)|
 | ------------- | ------------- |----------------------|
@@ -147,3 +147,13 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 ## SSD
 ### Summary
 ### Results
+
+We train the SSD model from scrath for the TT100K and Udacity datasets.
+
+TT100k dataset
+
+[Configuration file](../config/tt100k_detection_ssd.py) | [Weights file]()
+
+Udacity dataset
+
+[Configuration file](../config/udacity_detection_ssd.py) | [Weights file]()

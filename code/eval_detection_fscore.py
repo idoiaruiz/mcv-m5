@@ -42,15 +42,14 @@ NUM_CLASSES = len(classes)
 tiny_yolo = False
 
 if model_name == 'ssd':
-    model = build_ssd(img_shape = input_shape, n_classes = NUM_CLASSES, n_priors = 5,
-              load_pretrained = False, weights_file = 'weights.hdf5',
-              freeze_layers_from = 'base_model')
+    model = build_ssd(img_shape = input_shape, n_classes = NUM_CLASSES,
+                      n_priors = 5, freeze_layers_from = 'base_model')
 else:
     if model_name == 'tiny-yolo':
         tiny_yolo = True
-    model = build_yolo(img_shape = input_shape,n_classes = NUM_CLASSES, n_priors = 5,
-               load_imageNet = False,freeze_layers_from = 'base_model',
-               tiny = tiny_yolo)    
+    model = build_yolo(img_shape = input_shape,n_classes = NUM_CLASSES,
+               n_priors = 5, load_imageNet = False,
+               freeze_layers_from = 'base_model', tiny = tiny_yolo)
 
 
 
@@ -58,8 +57,8 @@ model.load_weights(sys.argv[1])
 
 
 test_dir = sys.argv[2]
-imfiles = [os.path.join(test_dir,f) for f in os.listdir(test_dir) 
-                                    if os.path.isfile(os.path.join(test_dir,f)) 
+imfiles = [os.path.join(test_dir,f) for f in os.listdir(test_dir)
+                                    if os.path.isfile(os.path.join(test_dir,f))
                                     and f.endswith('jpg')]
 
 if len(imfiles) == 0:
@@ -75,7 +74,7 @@ total_true = 0.
 total_pred = 0.
 
 for i,img_path in enumerate(imfiles):
-  
+
   img = image.load_img(img_path, target_size=(input_shape[1], input_shape[2]))
   img = image.img_to_array(img)
   img = img / 255.
@@ -115,7 +114,7 @@ for i,img_path in enumerate(imfiles):
               true_matched[t] = 1
               ok += 1.
               break
-       
+
         # You can visualize/save per image results with this:
         #im = cv2.imread(img_path)
         #im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)

@@ -174,8 +174,6 @@ class Model_Factory():
         elif cf.model_name == 'ssd':
             model = build_ssd(in_shape, cf.dataset.n_classes+1,
                               cf.dataset.n_priors,
-                              load_pretrained=cf.load_pretrained,
-                              weights_file=cf.weights_file,
                               freeze_layers_from=cf.freeze_layers_from)
         else:
             raise ValueError('Unknown model')

@@ -152,8 +152,8 @@ We train the SSD model from scrath for the TT100K and Udacity datasets.
 
 TT100k dataset
 
-[Configuration file](../config/tt100k_detection_ssd.py) | [Weights file]()
+[Configuration file](../config/tt100k_detection_ssd.py) | [Weights file](https://drive.google.com/file/d/0ByoayY6Lo-XTQ2RaZWFQR1VSU0k/view?usp=sharing)
 
 Udacity dataset
 
-[Configuration file](../config/udacity_detection_ssd.py) | [Weights file]()
+[Configuration file](../config/udacity_detection_ssd.py) | [Weights file](https://drive.google.com/file/d/0ByoayY6Lo-XTWlNwQXVCNEg2Q0k/view?usp=sharing)

@@ -23,10 +23,10 @@ For the object recognition problem, we implement and test several architectures,
 ### Object detection
 For object detection, we train and test the YOLOv2 model using the ImageNet pretrained weights. We also implement the SSD model and boost the performance of the networks with pre-processing, hyperparameter optimization and data augmentation.
  - [x] Implement the SSD architecture and train it from scratch for the Udacity and TT100k datasets.
- - [x] Train YOLOv2 and tiny YOLO for the TT100K and Udacity datasets using the ImageNet pretrained weights.
+ - [x] Train YOLOv2 and Tiny-YOLO models for the TT100K and Udacity datasets using the ImageNet pretrained weights.
  - [x] Boost the performance for the YOLOv2 model with preprocessing techniques and data augmentation.
  - [x] Analyze the Udacity dataset and propose two approaches for dealing with the differences between the validation and test datasets. Test it with the YOLOv2 model.
- - [x] Integrate F-score evaluation in our framework for the YOLOv2 model.
+ - [x] Integrate F-score and FPS evaluation in our framework and evaluate YOLOv2 and Tiny-YOLO models.
 
 ## Usage :computer:
 1. Fix the paths for the datasets in [train.py](code/train.py) for working on your machine.

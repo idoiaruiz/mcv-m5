@@ -145,10 +145,9 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 
 ## SSD
-### Summary
 ### Results
 
-We train the SSD model from scrath for the TT100K and Udacity datasets.
+We trained the SSD model from scrath for the TT100K and Udacity datasets. However the metrics are still not implemented to evaluate the model.
 
 TT100k dataset
 

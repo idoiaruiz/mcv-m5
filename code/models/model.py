@@ -201,8 +201,7 @@ class One_Net_Model(Model):
                                     np_argmax_b_probs = b.class_num
                                 else:    
                                     b_probs_np_argmax_b_probs = b.probs[np.argmax(b.probs)]
-                                    np_argmax_b_probs = np.argmax(b.probs)
-                                    
+                                    np_argmax_b_probs = np.argmax(b.probs)  
                                 if b_probs_np_argmax_b_probs < detection_threshold:
                                     continue
                                 total_pred += 1.
@@ -228,6 +227,8 @@ class One_Net_Model(Model):
                         #print 'total_true:',total_true,' total_pred:',total_pred,' ok:',ok
                         p = 0. if total_pred == 0 else (ok/total_pred)
                         r = ok/total_true
+                        print('Detections = ' + str(total_pred))
+                        print('True matched = ' + str(ok))
                         print('Precission = ' + str(p))
                         print('Recall     = ' + str(r))
                         f = 0. if (p + r) == 0 else (2*p*r/(p + r))

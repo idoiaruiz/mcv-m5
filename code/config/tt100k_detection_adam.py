@@ -8,10 +8,10 @@ perc_mb2                     = None            # Percentage of data from the sec
 model_name                   = 'yolo'          # Model to use: one of 'yolo' or 'tiny-yolo'
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
 show_model                   = False           # Show the architecture layers
-load_imageNet                = True            # Load Imagenet weights and normalize following imagenet procedure
-load_pretrained              = False           # Load a pretrained model for doing finetuning
-weights_file                 = 'weights.hdf5'  # Training weight file name
-different_datasets = False
+load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
+load_pretrained              = True           # Load a pretrained model for doing finetuning
+weights_file                 = '/home/master/M5/results/Experiments/TT100K_detection/yolo_training/weights.hdf5'  # Training weight file name
+
 # Parameters
 train_model                  = True            # Train the model
 test_model                   = True            # Test the model
@@ -44,7 +44,7 @@ seed_valid                   = 1924            # Random seed for the validation 
 seed_test                    = 1924            # Random seed for the testing shuffle
 
 # Training parameters
-optimizer                    = 'rmsprop'       # Optimizer
+optimizer                    = 'adam'       # Optimizer
 learning_rate                = 0.00001         # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
 n_epochs                     = 10              # Number of epochs during training

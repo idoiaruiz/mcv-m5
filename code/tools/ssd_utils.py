@@ -325,6 +325,7 @@ def ssd_postprocess_net_out(net_out, labels, threshold, nms_threshold):
             
             bx.c = expit(bx.c)#Good or wrong?
             bx.class_num = results[im][pred][0]
+
 #            self.x, self.y = float(), float()
 #            self.w, self.h = float(), float()
 #            self.c = float()
@@ -337,7 +338,7 @@ def ssd_postprocess_net_out(net_out, labels, threshold, nms_threshold):
 #            bx.w = math.exp(bx.w) * anchors[b][0] / W
 #            bx.h = math.exp(bx.h) * anchors[b][1] / H
 #            classes = net_out[row, col, b, 5:]
-            bx.probs = results[im][pred][1]
+            bx.probs = 1 #results[im][pred][1]
             bx.probs *= bx.probs > threshold
             
             

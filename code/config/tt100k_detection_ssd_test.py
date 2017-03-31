@@ -5,13 +5,13 @@ dataset_name2                = None            # Second dataset name. None if no
 perc_mb2                     = None            # Percentage of data from the second dataset in each minibatch
 
 # Model
-model_name                   = 'yolo'          # Model to use: one of 'yolo' or 'tiny-yolo'
+model_name                   = 'ssd'          # Model to use: ['yolo' | 'tiny-yolo' | 'ssd']
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
-show_model                   = False           # Show the architecture layers
-load_imageNet                = True            # Load Imagenet weights and normalize following imagenet procedure
+show_model                   = True           # Show the architecture layers
+load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
 load_pretrained              = False           # Load a pretrained model for doing finetuning
 weights_file                 = 'weights.hdf5'  # Training weight file name
-different_datasets = False
+
 # Parameters
 train_model                  = True            # Train the model
 test_model                   = True            # Test the model
@@ -22,7 +22,7 @@ debug                        = True           # Use only few images for debuging
 debug_images_train           = 16              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 16              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 16              # N images for testing in debug mode (-1 means all)
-debug_n_epochs               = 2              # N of training epochs in debug mode
+debug_n_epochs               = 1              # N of training epochs in debug mode
 
 # Batch sizes
 batch_size_train             = 16             # Batch size during training
@@ -31,9 +31,9 @@ batch_size_test              = 32             # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (320, 320)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (320, 320)      # Resize the image during validation
-resize_test                  = (320, 320)      # Resize the image during testing
+resize_train                 = (300, 300)      # Resize the image during training (Height, Width) or None
+resize_valid                 = (300, 300)      # Resize the image during validation
+resize_test                  = (300, 300)      # Resize the image during testing
 
 # Data shuffle
 shuffle_train                = True            # Whether to shuffle the training data
@@ -71,7 +71,7 @@ checkpoint_save_weights_only = True            # Save only weights or also model
 checkpoint_verbose           = 1               # Verbosity of the checkpoint
 
 # Callback plot
-plotHist_enabled             = True            # Enable the Callback
+plotHist_enabled             = False            # Enable the Callback
 plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler

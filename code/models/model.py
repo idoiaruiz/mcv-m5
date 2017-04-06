@@ -143,7 +143,7 @@ class One_Net_Model(Model):
                 
 
                 
-                test_dir = test_gen.directory
+                test_dir = '/data/module5/Datasets/detection/TT100K_detection/test/'
                 imfiles = [os.path.join(test_dir,f) for f in os.listdir(test_dir) 
                                     if os.path.isfile(os.path.join(test_dir,f)) 
                                     and f.endswith('jpg')]

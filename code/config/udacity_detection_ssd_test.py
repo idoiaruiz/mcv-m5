@@ -1,6 +1,6 @@
 # Dataset
 problem_type                 = 'detection'     # ['classification' | 'detection' | 'segmentation']
-dataset_name                 = 'TT100K_detection' # Dataset name
+dataset_name                 = 'Udacity'  #'TT100K_detection' # Dataset name
 dataset_name2                = None            # Second dataset name. None if not Domain Adaptation
 perc_mb2                     = None            # Percentage of data from the second dataset in each minibatch
 
@@ -10,20 +10,21 @@ freeze_layers_from           = None            # Freeze layers from 0 to this la
 different_datasets           = False
 show_model                   = True           # Show the architecture layers
 load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
-load_pretrained              = False           # Load a pretrained model for doing finetuning
-weights_file                 = 'weights.hdf5'  # Training weight file name
+load_pretrained              = True           # Load a pretrained model for doing finetuning
+weights_file                 = '/home/master/M5/results/Experiments/TT100K_detection/trainssd/weights.hdf5'  # Training weight file name
+weights_test_file            = '/home/master/M5/results/Experiments/Udacity/TrainSSDUdacity40/weights.hdf5'
 
 # Parameters
-train_model                  = True            # Train the model
+train_model                  = False            # Train the model
 test_model                   = True            # Test the model
 pred_model                   = False            # Predict using the model
 
 # Debug
-debug                        = True           # Use only few images for debuging
+debug                        = False           # Use only few images for debuging
 debug_images_train           = 16              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 16              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 16              # N images for testing in debug mode (-1 means all)
-debug_n_epochs               = 1              # N of training epochs in debug mode
+debug_n_epochs               = 2              # N of training epochs in debug mode
 
 # Batch sizes
 batch_size_train             = 16             # Batch size during training

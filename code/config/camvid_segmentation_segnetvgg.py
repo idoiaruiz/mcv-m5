@@ -19,7 +19,7 @@ test_model                   = True           # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = True           # Use only few images for debuging
+debug                        = False           # Use only few images for debuging
 debug_images_train           = 50              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 30              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 30              # N images for testing in debug mode (-1 means all)
@@ -29,12 +29,12 @@ debug_n_epochs               = 2               # N of training epochs in debug m
 batch_size_train             = 5               # Batch size during training
 batch_size_valid             = 10              # Batch size during validation
 batch_size_test              = 10              # Batch size during testing
-crop_size_train              = (224, 224)      # Crop size during training (Height, Width) or None
+crop_size_train              = None      # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (270, 480)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (270, 480)      # Resize the image during validation
-resize_test                  = (270, 480)      # Resize the image during testing
+resize_train                 = (224, 224)      # Resize the image during training (Height, Width) or None
+resize_valid                 = (224, 224)      # Resize the image during validation
+resize_test                  = (224, 224)      # Resize the image during testing
 
 # Data shuffle
 shuffle_train                = True            # Whether to shuffle the training data

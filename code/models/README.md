@@ -90,7 +90,7 @@ We also test to apply Dropout layers after every convolutional layer setting the
 | DenseNet      | 84.27         |      91.10           |
 | DenseNet with Dropout (rate=0.2) | 68.31 | 64.84     |
 
-[Weights file (for the first result)](https://drive.google.com/file/d/0ByoayY6Lo-XTT1A2MjV5a0VTWlk/view?usp=sharing) | [Configuration file](../config/dense_tt100k_scratch.py) | [Implementation](densenetFCN.py)
+[Weights file (for the first result)](https://drive.google.com/file/d/0ByoayY6Lo-XTT1A2MjV5a0VTWlk/view?usp=sharing) | [Configuration file](../config/tt100k_classif_densenet_scratch.py) | [Implementation](densenetFCN.py)
 
 ## Yolo
 [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)

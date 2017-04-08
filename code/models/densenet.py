@@ -6,11 +6,11 @@ from keras.layers import Dense, Dropout, Activation, Input, AveragePooling2D, Gl
 from keras.layers.normalization import BatchNormalization
 from keras.engine.topology import merge
 
-# Paper:
+# Paper: https://arxiv.org/pdf/1608.06993.pdf
 
 
-def build_densenetFCN(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
-                      freeze_layers_from='base_model', path_weights=None):
+def build_densenet(in_shape=(3, 224, 224), n_classes=1000, weight_decay=0.,
+                   freeze_layers_from='base_model', path_weights=None):
 
     # Layers before dense blocks
     inp = Input(shape=in_shape)

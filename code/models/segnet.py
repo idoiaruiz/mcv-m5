@@ -154,5 +154,6 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
 
 
 def segnet_basic(inp, kernel, concat_axis, n_classes):
+    # TODO: implement
 
     return None

@@ -1,6 +1,7 @@
 import keras.backend as K
 from keras.models import Model
-from keras.layers.core import Activation, Input
+from keras.layers import Input
+from keras.layers.core import Activation
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 

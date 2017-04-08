@@ -1,9 +1,10 @@
 import keras.backend as K
 from keras.models import Model
-from keras.layers import Input
+from keras.layers import Input, UpSampling2D
+from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.layers.core import Activation
-from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
+from keras.regularizers import l2
 
 from layers.ourlayers import DePool2D, NdSoftmax, CropLayer2D
 
@@ -16,6 +17,7 @@ def build_segnet(in_shape=(3, 224, 224), n_classes=11, weight_decay=0.,
     # TODO: weight decay
 
     kernel = 3  # kernel size
+    l2r = 0.  # L2 regularization
 
     if K.image_dim_ordering() == 'th':
         concat_axis = 1
@@ -25,7 +27,7 @@ def build_segnet(in_shape=(3, 224, 224), n_classes=11, weight_decay=0.,
     inp = Input(shape=in_shape)
 
     if basic:
-        predictions = segnet_basic(inp, kernel, concat_axis, n_classes)
+        predictions = segnet_basic(inp, 7, concat_axis, n_classes, l2r)
     else:
         predictions = segnet_VGG(inp, kernel, concat_axis, n_classes)
 
@@ -144,7 +146,50 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
     return predictions
 
 
-def segnet_basic(inp, kernel, concat_axis, n_classes):
-    # TODO: implement
+def segnet_basic(inp, kernel, concat_axis, n_classes, l2r):
 
-    return None
+    # Encoding layers
+    enc1 = downsampling_block_basic(inp, 64, kernel, concat_axis, l2(l2r))
+    enc2 = downsampling_block_basic(enc1, 64, kernel, concat_axis, l2(l2r))
+    enc3 = downsampling_block_basic(enc2, 64, kernel, concat_axis, l2(l2r))
+    enc4 = downsampling_block_basic(enc3, 64, kernel, concat_axis, l2(l2r))
+
+    # Decoding layers
+    dec1 = upsampling_block_basic(enc4, 64, kernel, enc4, concat_axis, l2(l2r))
+    dec2 = upsampling_block_basic(dec1, 64, kernel, enc3, concat_axis, l2(l2r))
+    dec3 = upsampling_block_basic(dec2, 64, kernel, enc2, concat_axis, l2(l2r))
+    dec4 = upsampling_block_basic(dec3, 64, kernel, enc1, concat_axis, l2(l2r))
+
+    l1 = Convolution2D(n_classes, 1, 1, border_mode='valid')(dec4)
+    score = CropLayer2D(inp, name='score')(l1)
+    predictions = NdSoftmax()(score)
+
+    return predictions
+
+
+def downsampling_block_basic(inputs, n_filters, kernel, concat_axis=-1,
+                             W_regularizer=None):
+    # This extra padding is used to prevent problems with different input
+    # sizes. At the end the crop layer remove extra paddings
+    pad = ZeroPadding2D(padding=(1, 1))(inputs)
+    conv = Convolution2D(n_filters, kernel, kernel, border_mode='same',
+                         W_regularizer=W_regularizer)(pad)
+    bn = BatchNormalization(mode=0, axis=concat_axis)(conv)
+    act = Activation('relu')(bn)
+    output = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(act)
+
+    return output
+
+
+def upsampling_block_basic(inputs, n_filters, kernel, unpool_layer=None,
+                           concat_axis=-1, W_regularizer=None,
+                           use_unpool=True):
+    if use_unpool:
+        up = DePool2D(unpool_layer)(inputs)
+        return up
+    else:
+        up = UpSampling2D()(inputs)
+        conv = Convolution2D(n_filters, kernel, kernel, border_mode='same',
+                             W_regularizer=W_regularizer)(up)
+        bn = BatchNormalization(mode=0, axis=concat_axis,)(conv)
+        return bn

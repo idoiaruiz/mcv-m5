@@ -58,7 +58,7 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
     x = Activation('relu')(x)
     pool1 = MaxPooling2D((2, 2), strides=(2, 2))(x)
 
-    x = Convolution2D(128, kernel, kernel, border_mode='same')(x)
+    x = Convolution2D(128, kernel, kernel, border_mode='same')(pool1)
     x = BatchNormalization(mode=0, axis=concat_axis)(x)
     x = Activation('relu')(x)
     x = Convolution2D(128, kernel, kernel, border_mode='same')(x)
@@ -66,7 +66,7 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
     x = Activation('relu')(x)
     pool2 = MaxPooling2D((2, 2), strides=(2, 2))(x)
 
-    x = Convolution2D(256, kernel, kernel, border_mode='same')(x)
+    x = Convolution2D(256, kernel, kernel, border_mode='same')(pool2)
     x = BatchNormalization(mode=0, axis=concat_axis)(x)
     x = Activation('relu')(x)
     x = Convolution2D(256, kernel, kernel, border_mode='same')(x)
@@ -77,7 +77,7 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
     x = Activation('relu')(x)
     pool3 = MaxPooling2D((2, 2), strides=(2, 2))(x)
 
-    x = Convolution2D(512, kernel, kernel, border_mode='same')(x)
+    x = Convolution2D(512, kernel, kernel, border_mode='same')(pool3)
     x = BatchNormalization(mode=0, axis=concat_axis)(x)
     x = Activation('relu')(x)
     x = Convolution2D(512, kernel, kernel, border_mode='same')(x)
@@ -88,7 +88,7 @@ def segnet_VGG(inp, kernel, concat_axis, n_classes):
     x = Activation('relu')(x)
     pool4 = MaxPooling2D((2, 2), strides=(2, 2))(x)
 
-    x = Convolution2D(512, kernel, kernel, border_mode='same')(x)
+    x = Convolution2D(512, kernel, kernel, border_mode='same')(pool4)
     x = BatchNormalization(mode=0, axis=concat_axis)(x)
     x = Activation('relu')(x)
     x = Convolution2D(512, kernel, kernel, border_mode='same')(x)

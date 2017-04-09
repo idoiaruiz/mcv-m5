@@ -28,6 +28,14 @@ For object detection, we train and test the YOLOv2 model using the ImageNet pret
  - [x] Analyze the Udacity dataset and propose two approaches for dealing with the differences between the validation and test datasets. Test it with the YOLOv2 model.
  - [x] Integrate F-score and FPS evaluation in our framework and evaluate YOLOv2 and Tiny-YOLO models.
 
+### Semantic segmentation
+We implement several state-of-the-art semantic segmentation architectures, training them for the Camvid dataset. We train as well the FCN model for the Synthia dataset. This model is also boosted with hyperparameter optimization and data augmentation.
+- [x] Implement the Segnet model (Segnet with VGG and the 'Segnet Basic' version) and train it from scratch for the Camvid dataset.
+- [x] Train the FCN model for the Camvid and Synthia datasets from scratch.
+- [x] Boost the performance for the FCN model with preprocessing techniques and data augmentation.
+- [ ] Implement a semantic segmentation architecture using InceptionV3 as the classification architecture.
+- [ ] Implement a semantic segmentation architecture using DenseNet as the classification architecture.
+
 ## Usage :computer:
 1. Fix the paths for the datasets in [train.py](code/train.py) for working on your machine.
 

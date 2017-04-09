@@ -1,5 +1,6 @@
 # Models
 
+# Classification
 ## VGG16 and VGG19 network
 [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf).
 ### Summary
@@ -92,13 +93,14 @@ We also test to apply Dropout layers after every convolutional layer setting the
 
 [Weights file (for the first result)](https://drive.google.com/file/d/0ByoayY6Lo-XTT1A2MjV5a0VTWlk/view?usp=sharing) | [Configuration file](../config/tt100k_classif_densenet_scratch.py) | [Implementation](densenetFCN.py)
 
-## Yolo
+# Object detection
+## YOLO
 [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
 ### Summary
 As other deep architectures for object detection need to look several times on the image, this architecture only needs to look one time at an image in order to find the objects in it. The architecture divides the image in a 7x7 grid and it passes each cell through a convolutional neural network in order to obtain a bounding box and a list of probabilities for all the classes.
 
 ### Results
-We train Yolo with the preconfigured experiment file for the TT100K and Udacity datasets. After that, we evaluate, for both datasets, different techniques in the configuration file to see how it affects to the behavior of the network. All the results can be seen the following tables.
+We train YOLO with the preconfigured experiment file for the TT100K and Udacity datasets. After that, we evaluate, for both datasets, different techniques in the configuration file to see how it affects to the behavior of the network. All the results can be seen the following tables.
 
 #### TT100K Dataset
 [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvZmpiaFRHbXI4Vzg) | [Configuration file](../config/yoloBaselineTt100k.py) | [Implementation](yolo.py)
@@ -106,15 +108,15 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 |  | Precission (%) | Recall (%) | F-score(%) | FPS |
 |-------------| ------------- | ------------- |----------------------|----------------------|
-|Yolo|    80.78   | 60.57         |      69.23           | 19.90 |
-|Tiny Yolo|  53.29 | 27.04 | 35.88     | 31.76 |
+|YOLO|    80.78   | 60.57         |      69.23           | 19.90 |
+|Tiny YOLO|  53.29 | 27.04 | 35.88     | 31.76 |
 |Horizontal and Vertical shift (20%)|  74.36 | 61.04 | 67.04     | 19.65 |
 |Horizontal flip|  81.60 | 67.30 | 73.76     | 19.76 |
 |Feature Normalization|  81.02 | 69.20 | 74.65     | 19.90 |
 |Horizontal flip and feature norm.|  84.89 | 71.83 | 77.81     | 19.78 |
 
-[Configuration file Yolo](../config/yoloBaselineTt100k.py) |
-[Configuration file Tiny Yolo](../config/TinyyoloTt100k.py) |
+[Configuration file YOLO](../config/yoloBaselineTt100k.py) |
+[Configuration file Tiny YOLO](../config/TinyyoloTt100k.py) |
 [Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftTt100k.py) |
 [Configuration file Horizontal flip](../config/yoloDataAugTt100k.py) |
 [Configuration file Feature normalization](../config/yoloFeatNormTt100k.py) |
@@ -128,21 +130,19 @@ We train Yolo with the preconfigured experiment file for the TT100K and Udacity 
 
 |  | Precission (%) | Recall (%) | F-score(%) | FPS |
 |-------------| ------------- | ------------- |----------------------|----------------------|
-|Yolo|    51.05   | 28.69         |      36.74           | 20.00 |
-|Tiny Yolo|  11.02 | 4.11 | 5.98     | 32.00 |
+|YOLO|    51.05   | 28.69         |      36.74           | 20.00 |
+|Tiny YOLO|  11.02 | 4.11 | 5.98     | 32.00 |
 |Horizontal and Vertical shift (20%)|  53.35 | 32.98 | 40.76     | 19.84 |
 |Horizontal flip|  35.76 | 22.51 | 27.63     | 19.94 |
 |Feature Normalization|  40.17 | 25.06 | 30.87     | 19.84 |
 |Horizontal flip and feature norm.|  40.59 | 22.23 | 28.72     | 19.89 |
 
-[Configuration file Yolo](../config/yoloBaselineUdacity.py) |
-[Configuration file Tiny Yolo](../config/TinyyoloUdacity.py) |
+[Configuration file YOLO](../config/yoloBaselineUdacity.py) |
+[Configuration file Tiny YOLO](../config/TinyyoloUdacity.py) |
 [Configuration file Horizontal and Vertical shift (20%)](../config/yoloHandVshiftUdacity.py) |
 [Configuration file Horizontal flip](../config/yoloDataAugUdacity.py) |
 [Configuration file Feature normalization](../config/yoloFeatNormUdacity.py) |
 [Configuration file Horizontal flip and feature norm.](../config/yoloDataAugFeatNormUdacity.py)
-
-
 
 ## SSD
 ### Results
@@ -156,3 +156,15 @@ TT100k dataset
 Udacity dataset
 
 [Configuration file](../config/udacity_detection_ssd.py) | [Weights file](https://drive.google.com/file/d/0ByoayY6Lo-XTWlNwQXVCNEg2Q0k/view?usp=sharing)
+
+# Semantic segmentation
+## FCN
+
+
+## Segnet
+### Results
+
+#### SegnetVGG
+[Configuration file](../config/camvid_segmentation_segnetvgg.py) | [Weights file]()
+#### Segnet Basic
+[Configuration file](../config/camvid_segmentation_segnetbasic.py) | [Weights file]()

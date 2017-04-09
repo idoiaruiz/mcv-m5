@@ -186,10 +186,10 @@ def upsampling_block_basic(inputs, n_filters, kernel, unpool_layer=None,
                            use_unpool=True):
     if use_unpool:
         up = DePool2D(unpool_layer)(inputs)
-        return up
     else:
         up = UpSampling2D()(inputs)
-        conv = Convolution2D(n_filters, kernel, kernel, border_mode='same',
-                             W_regularizer=W_regularizer)(up)
-        bn = BatchNormalization(mode=0, axis=concat_axis,)(conv)
-        return bn
+
+    conv = Convolution2D(n_filters, kernel, kernel, border_mode='same',
+                         W_regularizer=W_regularizer)(up)
+    bn = BatchNormalization(mode=0, axis=concat_axis,)(conv)
+    return bn

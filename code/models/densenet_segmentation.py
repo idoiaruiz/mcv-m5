@@ -174,7 +174,7 @@ def transition_up_Layer(skip_connection, block_to_upsample, n_filters_keep):
         
     x = merge(block_to_upsample, mode = 'concat', concat_axis = concat_axis)
     print('shape:' + str(x._keras_shape))
-    x = Deconvolution2D(n_filters_keep, 3, 3, x._keras_shape, activation = 'linear', border_mode='valid', subsample = (1/2, 1/2))(x)
+    x = Deconvolution2D(n_filters_keep, 2, 2, input_shape = x._keras_shape, activation = 'linear', border_mode='same', subsample = (50, 50))(x)
     print('shape:' + str(x._keras_shape))
     x = merge([x, skip_connection], mode = 'concat', concat_axis = concat_axis)
     
@@ -195,7 +195,13 @@ def transition_up_Layer(skip_connection, block_to_upsample, n_filters_keep):
 #    # Note : we also tried Subpixel Deconvolution without seeing any improvements.
 #    # We can reduce the number of parameters reducing n_filters_keep in the Deconvolution
 
-
+if __name__ == '__main__':
+    input_shape = [3, 224, 224]
+    print (' > Building')
+    model = build_densenet_segmentation(input_shape, 11, 0.)
+    print (' > Compiling')
+    model.compile(loss="categorical_crossentropy", optimizer="rmsprop")
+    model.summary()
 
 
 

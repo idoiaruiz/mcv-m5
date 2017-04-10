@@ -24,7 +24,7 @@ from models.fcn8 import build_fcn8
 from models.segnet import build_segnet
 #from models.resnetFCN import build_resnetFCN
 #from models.densenetFCN import build_densenetFCN
-
+from models.densenet_segmentation import build_densenet_segmentation
 # Adversarial models
 #from models.adversarial_semseg import Adversarial_Semseg
 
@@ -89,7 +89,8 @@ class Model_Factory():
     def make(self, cf, optimizer=None):
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
                              'InceptionV3', 'densenet', 'fcn8', 'unet', 'segnet_vgg',
-                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo', 'ssd']:
+                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo', 'ssd', 
+                             'densenet_segmentation']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
@@ -175,6 +176,9 @@ class Model_Factory():
             model = build_ssd(in_shape, cf.dataset.n_classes+1,
                               cf.dataset.n_priors,
                               freeze_layers_from=cf.freeze_layers_from)
+        elif cf.model_name == 'densenet_segmentation':
+            model = build_densenet_segmentation(in_shape, cf.dataset.n_classes, weight_decay = cf.weight_decay,
+                   freeze_layers_from = cf.freeze_layers_from, path_weights = cf.load_imageNet)
         else:
             raise ValueError('Unknown model')
 

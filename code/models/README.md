@@ -163,33 +163,33 @@ Udacity dataset
 
 ### Results
 
-Camvid dataset
+#### Camvid dataset
 
-[Configuration Camvid file](../config/camvid_FCN.py) | [Camvid Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvX3MyY1BlNVV6TXc)
+[Configuration file Camvid](../config/camvid_FCN.py) | [Camvid Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvX3MyY1BlNVV6TXc)
 
-| Train with Camvid dataset | Validation accuracy (%) |Test accuracy (%)|FPS |
-| ------------- | ------------- |----------------------|----------------------|
-| Baseline Camvid |  |     |	        |
-| Camvid with Horizontal and Vertical shift (20%) |         |                 |	        |
-| Camvid with Horizontal flip |  |     |	        |
-| Camvid with Feature normalization |          |                 |	        |
-| Camvid with Horizontal flip and feature norm. |  |     |	        |
+| Train with Camvid dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Baseline Camvid |  |     |	        
+| Camvid with Horizontal and Vertical shift (20%) |         |                 |	        
+| Camvid with Horizontal flip |  |     |	        
+| Camvid with Feature normalization |          |                 |	        
+| Camvid with Horizontal flip and feature norm. |  |     |	        
 
 
-[Configuration file Camvid](../config/camvid_FCN.py) |
-[Configuration file Camvid Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) |
-[Configuration file Camvid Horizontal flip](../config/camvid_FCN_horizontal_flip.py) |
+[Configuration file Baseline](../config/camvid_FCN.py) |
+[Configuration file Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) |
+[Configuration file Horizontal flip](../config/camvid_FCN_horizontal_flip.py) |
 [Configuration file Feature normalization](../config/camvid_FeatureNormalization.py) |
 [Configuration file Horizontal flip and feature norm.](../config/camvid_FCN_FeatureNormalization_HorizontalFlip.py)
 
 
-Synthia dataset
+#### Synthia dataset
 
-[Configuration Synthia file](../config/synthia_FCN.py) | [Synthia Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvMlVtWi1VdEVpd0U)
+[Configuration file Synthia](../config/synthia_FCN.py) | [Synthia Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvMlVtWi1VdEVpd0U)
 
-| Train with Synthia dataset | Validation accuracy (%) |Test accuracy (%)|FPS |
-| ------------- | ------------- |----------------------|----------------------|
-| Baseline Synthia |          |                 |	        |
+| Train with Synthia dataset | Validation accuracy (%) |Test accuracy (%)|
+| ------------- | ------------- |----------------------|
+| Baseline Synthia |          |                 |	        
 
 
 

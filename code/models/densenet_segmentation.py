@@ -174,7 +174,7 @@ def transition_up_Layer(skip_connection, block_to_upsample, n_filters_keep):
         
     x = merge(block_to_upsample, mode = 'concat', concat_axis = concat_axis)
     print('shape:' + str(x._keras_shape))
-    x = Deconvolution2D(n_filters_keep, 3, 3, x._keras_shape, activation = 'linear', border_mode='same', subsample = (2, 2))(x)
+    x = Deconvolution2D(n_filters_keep, 3, 3, x._keras_shape, activation = 'linear', border_mode='valid', subsample = (1/2, 1/2))(x)
     print('shape:' + str(x._keras_shape))
     x = merge([x, skip_connection], mode = 'concat', concat_axis = concat_axis)
     

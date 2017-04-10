@@ -24,7 +24,10 @@ from models.fcn8 import build_fcn8
 from models.segnet import build_segnet
 #from models.resnetFCN import build_resnetFCN
 #from models.densenetFCN import build_densenetFCN
+
 from models.densenet_segmentation import build_densenet_segmentation
+from models.inceptionFCN import build_inceptionFCN
+
 # Adversarial models
 #from models.adversarial_semseg import Adversarial_Semseg
 
@@ -137,6 +140,10 @@ class Model_Factory():
             model = build_resnetFCN(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                     freeze_layers_from=cf.freeze_layers_from,
                                     path_weights=None)
+        elif cf.model_name == 'inceptionFCN':
+            model = build_inceptionFCN(in_shape, cf.dataset.n_classes, cf.weight_decay,
+                                    freeze_layers_from=cf.freeze_layers_from,
+                                    path_weights=None)									
         elif cf.model_name == 'densenet':
             model = build_densenet(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                       freeze_layers_from=cf.freeze_layers_from,

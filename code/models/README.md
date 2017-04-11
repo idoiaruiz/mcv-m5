@@ -169,21 +169,21 @@ Udacity dataset
 
 | Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jacquard mean - Validation set| Jacquard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
-| Baseline| 91.50  |   86.35  |  0.626   |  0.518   |	        
-| RMSprop optimizer (lr=0.0001) with Horizontal and Vertical shift (20%) |    91.55     |     86.72     |  0.632   |  0.541   |        
-| RMSprop optimizer (lr=0.0001) with Horizontal flip | 92.96 |  87.34   |  0.686   |   0.558  |	        
-| RMSprop optimizer (lr=0.0001) with Feature normalization |     91.68     |            85.16     |  0.626   |  0.505   |	        
-| RMSprop optimizer (lr=0.0001) with Horizontal flip and feature norm. | 91.79 |   84.46  |   0.646  | 0.498    |
+| Baseline: RMSprop optimizer (lr=0.0001)| 91.50  |   86.35  |  0.626   |  0.518   |	        
+| Baseline with Horizontal and Vertical shift (20%) |    91.55     |     86.72     |  0.632   |  0.541   |        
+| Baseline with with Horizontal flip | 92.96 |  87.34   |  0.686   |   0.558  |	        
+| Baseline with with Feature normalization |     91.68     |            85.16     |  0.626   |  0.505   |	        
+| Baseline with with Horizontal flip and feature norm. | 91.79 |   84.46  |   0.646  | 0.498    |
 | RMSprop optimizer (lr=0.00001) with Horizontal flip and feature norm. | 89.96 |   84.40  |   0.578  | 0.492    |
 | Adam optimizer (lr=0.0001) with Horizontal flip and feature norm. | 91.68 |   85.16  |   0.626  | 0.506    |
 | Adam optimizer (lr=0.001) with Horizontal flip and feature norm. | 89.86 |   83.24  |   0.543  | 0.436    |	        
 
 
 [Configuration file: Baseline](../config/camvid_FCN.py) |
-[Configuration file: RMSprop opt. (lr=0.0001) with Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) |
-[Configuration file: RMSprop opt. (lr=0.0001) with Horizontal flip](../config/camvid_FCN_horizontal_flip.py) |
-[Configuration file: RMSprop opt. (lr=0.0001) with Feature normalization](../config/camvid_FeatureNormalization.py) |
-[Configuration file: RMSprop opt. (lr=0.0001) with Horizontal flip and feature norm.](../config/camvid_FCN_FeatureNormalization_HorizontalFlip.py)|
+[Configuration file: Baseline with Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) |
+[Configuration file: Baseline with Horizontal flip](../config/camvid_FCN_horizontal_flip.py) |
+[Configuration file: Baseline with Feature normalization](../config/camvid_FeatureNormalization.py) |
+[Configuration file: Baseline with Horizontal flip and feature norm.](../config/camvid_FCN_FeatureNormalization_HorizontalFlip.py)|
 [Configuration file: RMSprop opt. (lr=0.00001) with Horizontal flip and feature norm.](../config/camvid_FCN_RMSprop00001_FeatNorm_HFlip.py) |
 [Configuration file: Adam opt. (lr=0.0001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam0001_FeatNorm_HFlip.py) |
 [Configuration file: Adam opt. (lr=0.001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam001_FeatNorm_HFlip.py)

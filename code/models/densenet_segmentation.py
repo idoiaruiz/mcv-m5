@@ -6,7 +6,8 @@ from keras.layers import Dropout, Activation, Input
 from keras.layers.normalization import BatchNormalization
 from keras.engine.topology import merge
 from layers.deconv import Deconvolution2D
-from layers.ourlayers import  NdSoftmax
+from layers.ourlayers import  NdSoftmax, CropLayer2D, DePool2D
+from keras.layers import UpSampling2D
 # Paper: https://arxiv.org/pdf/1611.09326.pdf
 
 
@@ -16,7 +17,7 @@ def build_densenet_segmentation(in_shape = (3, 224, 224), n_classes = 1000, weig
     #####################
     # First Convolution #
     #####################
-    
+    print('Input shape:' + str(in_shape))
     inp = Input(shape = in_shape)
     n_filter = 48
     x = Convolution2D(n_filter, 3, 3, subsample = (1, 1),
@@ -35,12 +36,12 @@ def build_densenet_segmentation(in_shape = (3, 224, 224), n_classes = 1000, weig
         #Dense block
         x, n_filter = denseBlock_down(x, n_layers_down[i], growth_rate, n_filter, dropout_fraction)
         
-        print('number of filters = ' + str(x._keras_shape[1]))
+        print('number of filters = ' + str(x._keras_shape[-1]))
         
         x = transition_down_Layer(x, n_filter, dropout_fraction)
         # At the end of the dense block, the current output is stored in the skip_connections list
         skip_connection_list.append(x)
-        
+#        print('Shape: ' + str(x._keras_shape))
     skip_connection_list = skip_connection_list[::-1]
 
     #####################
@@ -50,7 +51,7 @@ def build_densenet_segmentation(in_shape = (3, 224, 224), n_classes = 1000, weig
     # We store now the output of the next dense block in a list(block_to_upsample). 
     # We will only upsample these new feature maps
     x, n_filter, block_to_upsample = denseBlock_up(x, n_layers, growth_rate, n_filter, dropout_fraction)
-    print('number of filters = ' + str(x._keras_shape[1]))
+    print('number of filters = ' + str(x._keras_shape[-1]))
     
     
     # Add dense blocks of upsampling path
@@ -60,12 +61,13 @@ def build_densenet_segmentation(in_shape = (3, 224, 224), n_classes = 1000, weig
     
         # Transition Up ( Upsampling + concatenation with the skip connection)
         n_filters_keep = growth_rate * n_layers_up[j - 1]
-        print('number of filters to keep = ' + str(n_filters_keep))
 
         x = transition_up_Layer(skip_connection_list[j - 1], block_to_upsample, n_filters_keep)
         x, n_filter, block_to_upsample = denseBlock_up(x, n_layers_up[j], growth_rate, n_filter, dropout_fraction)
-        print('number of filters = ' + str(x._keras_shape[1]))
-        
+        print('number of filters = ' + str(x._keras_shape[-1]))
+    x = Deconvolution2D(n_filters_keep, 3, 3, input_shape = x._keras_shape, 
+                        activation = 'linear', border_mode='valid', subsample = (2, 2))(x)
+    x = CropLayer2D(inp)(x)
     #Last convolution    
     x = Convolution2D(n_classes, 1, 1, subsample = (1, 1),
                       border_mode = 'same')(x)
@@ -74,10 +76,10 @@ def build_densenet_segmentation(in_shape = (3, 224, 224), n_classes = 1000, weig
     #      Softmax      #
     #####################
     predictions = NdSoftmax()(x)
-
+    print('Predictions_shape: ' + str(predictions._keras_shape))
     # This is the model we will train
     model = Model(input = inp, output = predictions)
-#    model.summary()
+    model.summary()
     # Freeze some layers
     if freeze_layers_from is not None:
         if freeze_layers_from == 'base_model':
@@ -169,31 +171,32 @@ def transition_down_Layer(x, n_filter, dropout_fraction):
 def transition_up_Layer(skip_connection, block_to_upsample, n_filters_keep):
     if K.image_dim_ordering() == 'th':
         concat_axis = 1
+#        sizeSC = [skip_connection._keras_shape[2], skip_connection._keras_shape[3]]
+#        sizeX = [x._keras_shape[2], x._keras_shape[3]]
     elif K.image_dim_ordering() == 'tf':
         concat_axis = -1
+
+#        sizeSC = [skip_connection._keras_shape[1], skip_connection._keras_shape[2]]
+#        sizeX = [x._keras_shape[1], x._keras_shape[2]]
         
     x = merge(block_to_upsample, mode = 'concat', concat_axis = concat_axis)
-    print('shape:' + str(x._keras_shape))
-    x = Deconvolution2D(n_filters_keep, 2, 2, input_shape = x._keras_shape, activation = 'linear', border_mode='same', subsample = (50, 50))(x)
-    print('shape:' + str(x._keras_shape))
-    x = merge([x, skip_connection], mode = 'concat', concat_axis = concat_axis)
-    
+    print('shape_x:' + str(x._keras_shape))
+    x = Deconvolution2D(n_filters_keep, 3, 3, input_shape = x._keras_shape, activation = 'linear', border_mode='valid', subsample = (2, 2))(x)
+    print('shape_x_deconv:' + str(x._keras_shape))
+    x_crop = CropLayer2D(skip_connection)(x)
+    print('shape:' + str(x_crop._keras_shape))
+
+    x = merge([x_crop, skip_connection], mode = 'concat', concat_axis = concat_axis)
+#    print('shape_skip_connection:' + str(skip_connection._keras_shape))
+#    newSkip = CropLayer2D(x)(skip_connection)
+#    
+#
+#
+#    x = merge([x, newSkip], mode = 'concat', concat_axis = concat_axis)
+    print('shape_merge:' + str(x._keras_shape))
     return x
 
-#def TransitionUp(skip_connection, block_to_upsample, n_filters_keep):
-#    """
-#    Performs upsampling on block_to_upsample by a factor 2 and concatenates it with the skip_connection """
-#
-#    # Upsample
-#    l = ConcatLayer(block_to_upsample)
-#    l = Deconv2DLayer(l, n_filters_keep, filter_size=3, stride=2,
-#                      crop='valid', W=HeUniform(gain='relu'), nonlinearity=linear)
-#    # Concatenate with skip connection
-#    l = ConcatLayer([l, skip_connection], cropping=[None, None, 'center', 'center'])
-#
-#    return l
-#    # Note : we also tried Subpixel Deconvolution without seeing any improvements.
-#    # We can reduce the number of parameters reducing n_filters_keep in the Deconvolution
+
 
 if __name__ == '__main__':
     input_shape = [3, 224, 224]

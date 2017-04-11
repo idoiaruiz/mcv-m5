@@ -26,7 +26,7 @@ from models.segnet import build_segnet
 #from models.densenetFCN import build_densenetFCN
 
 from models.densenet_segmentation import build_densenet_segmentation
-from models.inceptionFCN import build_inceptionFCN
+#from models.inceptionFCN import build_inceptionFCN
 
 # Adversarial models
 #from models.adversarial_semseg import Adversarial_Semseg
@@ -97,7 +97,8 @@ class Model_Factory():
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
-            in_shape, loss, metrics = self.basic_model_properties(cf, True)
+            in_shape, loss, metrics = self.basic_model_properties(cf, False)
+            
             model = self.make_one_net_model(cf, in_shape, loss, metrics,
                                             optimizer)
 

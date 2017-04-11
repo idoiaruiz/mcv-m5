@@ -213,3 +213,14 @@ Configuration files:
 | Baseline|   |     |     |     |
 
 Configuration files:
+
+## DenseNet FCN
+
+### Results
+
+#### Camvid dataset
+
+[Configuration file](../config/) | [Weights file]()
+| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
+| ------------- | ------------- |----------------------|----------------------|----------------------|
+| Baseline|   |     |     |    |	

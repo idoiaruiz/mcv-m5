@@ -174,8 +174,13 @@ def transition_up_Layer(skip_connection, block_to_upsample, n_filters_keep):
         
     x = merge(block_to_upsample, mode = 'concat', concat_axis = concat_axis)
     print('shape:' + str(x._keras_shape))
-    x = Deconvolution2D(n_filters_keep, 2, 2, input_shape = x._keras_shape, activation = 'linear', border_mode='same', subsample = (50, 50))(x)
+    x = Deconvolution2D(n_filters_keep, 3, 3, input_shape = x._keras_shape, activation = 'linear', border_mode='same', subsample = (50, 50))(x)
     print('shape:' + str(x._keras_shape))
+
+    sizeSC = [skip_connection._keras_shape[2], skip_connection._keras_shape[3]]
+    sizeX = [x._keras_shape[2], x._keras_shape[3]]
+    x = UpSampling2D(size=(sizeSC[0]/sizeX[0], sizeSC[1]/sizeX[0]))(x)
+
     x = merge([x, skip_connection], mode = 'concat', concat_axis = concat_axis)
     
     return x

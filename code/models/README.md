@@ -159,7 +159,8 @@ Udacity dataset
 
 # Semantic segmentation
 ## FCN
-
+### Summary
+The Fully Convolutional Net has the most common structures of networks for semantic segmentation: two blocks, called decoder and encoder. The first one is a common classification structure such as vgg and the second one is the inverse of the first, using unpooling layers to increase again the feature maps in order to get the original. Moreover, the two blocks are connected with some skip-connections to take into account information of previous layers when doing the segmentation.
 ### Results
 
 #### Camvid dataset
@@ -215,6 +216,9 @@ Configuration files:
 Configuration files:
 
 ## DenseNet FCN
+### Summary
+
+The structure of the Fully Convolutional DenseNet can be understand as an extension of DenseNet classification architecture to the object segmentation problem. The structure of this network is the following: its defines three differnet blocks: a dense block, a transition down and a transition up. The dense block is similar to the one used in section \ref{seg:recognition}, in this case composed by a Batch Normalization, a ReLU activation, a $3\times 3$ convolution and a dropout of fraction $0.2$. The transition down block is formed by a Batch Normalization, ReLU a activation, a $1\times 1$ convolution, a dropout of fraction $0.2$ and a non-overlapping max pooling of $2\times 2$. Finally, the transition up block it only haves a  $3\times 3$ deconvolution with stride 2. To create the network, dense blocks of different sizes are created with a transition down block between each pair of them for the downsampling path and for the upsampling path, the same dense blocks are created in descending order with skip connections and transition up blocks so a proper segmentation  map can be properly obtained.
 
 ### Results
 

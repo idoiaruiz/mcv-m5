@@ -167,7 +167,7 @@ Udacity dataset
 
 [Configuration file Camvid](../config/camvid_FCN.py) | [Camvid Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvX3MyY1BlNVV6TXc)
 
-| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jacquard mean - Validation set| Jacquard mean - Test set|
+| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
 | Baseline: RMSprop optimizer (lr=0.0001)| 91.50  |   86.35  |  0.626   |  0.518   |	        
 | Baseline with Horizontal and Vertical shift (20%) |    91.55     |     86.72     |  0.632   |  0.541   |        
@@ -194,7 +194,7 @@ Udacity dataset
 
 [Configuration file Synthia](../config/synthia_FCN.py) | [Synthia Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvMlVtWi1VdEVpd0U)
 
-| Train with Synthia dataset | Validation accuracy (%) | Test accuracy (%) | Jacquard mean - Validation set| Jacquard mean - Test set|
+| Train with Synthia dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
 | Baseline|   |     |     |     |	
 

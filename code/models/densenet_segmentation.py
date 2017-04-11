@@ -6,7 +6,8 @@ from keras.layers import Dropout, Activation, Input
 from keras.layers.normalization import BatchNormalization
 from keras.engine.topology import merge
 from layers.deconv import Deconvolution2D
-from layers.ourlayers import  NdSoftmax
+from layers.ourlayers import  NdSoftmax, CropLayer2D, DePool2D
+from keras.layers import UpSampling2D
 # Paper: https://arxiv.org/pdf/1611.09326.pdf
 
 

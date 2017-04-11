@@ -26,14 +26,14 @@ debug_n_epochs               = 2               # N of training epochs in debug m
 
 # Batch sizes
 batch_size_train             = 5               # Batch size during training
-batch_size_valid             = 10              # Batch size during validation
-batch_size_test              = 10              # Batch size during testing
-crop_size_train              = (224, 224)      # Crop size during training (Height, Width) or None
+batch_size_valid             = 5              # Batch size during validation
+batch_size_test              = 5              # Batch size during testing
+crop_size_train              = None#(224, 224)      # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (270, 480)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (270, 480)      # Resize the image during validation
-resize_test                  = (270, 480)      # Resize the image during testing
+resize_train                 = (224, 224)#(270, 480)      # Resize the image during training (Height, Width) or None
+resize_valid                 = (224, 224)#(270, 480)      # Resize the image during validation
+resize_test                  = (224, 224)#(270, 480)      # Resize the image during testing
 
 # Data shuffle
 shuffle_train                = True            # Whether to shuffle the training data

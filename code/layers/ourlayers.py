@@ -107,9 +107,10 @@ class CropLayer2D(Layer):
             return tuple(input_shape[:-2]) + (self.crop_size[0],
                                               self.crop_size[1])
         if self.dim_ordering == 'tf':
-            return ((input_shape[:1], ) + tuple(self.crop_size) +
+#            return ((input_shape[:1], ) + tuple(self.crop_size) +
+#                    (input_shape[-1], ))
+            return ((input_shape[:1] ) + tuple(self.crop_size) +
                     (input_shape[-1], ))
-
     # def get_config(self):
     #     config = {'img_in': self.img_in,
     #               'dim_ordering': self.dim_ordering}

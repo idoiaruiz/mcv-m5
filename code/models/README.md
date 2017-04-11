@@ -160,7 +160,6 @@ Udacity dataset
 # Semantic segmentation
 ## FCN
 
-
 ### Results
 
 #### Camvid dataset
@@ -178,15 +177,9 @@ Udacity dataset
 | Adam optimizer (lr=0.0001) with Horizontal flip and feature norm. | 91.68 |   85.16  |   0.626  | 0.506    |
 | Adam optimizer (lr=0.001) with Horizontal flip and feature norm. | 89.86 |   83.24  |   0.543  | 0.436    |	        
 
+Configuration files:
 
-[Configuration file: Baseline](../config/camvid_FCN.py) |
-[Configuration file: Baseline with Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) |
-[Configuration file: Baseline with Horizontal flip](../config/camvid_FCN_horizontal_flip.py) |
-[Configuration file: Baseline with Feature normalization](../config/camvid_FeatureNormalization.py) |
-[Configuration file: Baseline with Horizontal flip and feature norm.](../config/camvid_FCN_FeatureNormalization_HorizontalFlip.py)|
-[Configuration file: RMSprop opt. (lr=0.00001) with Horizontal flip and feature norm.](../config/camvid_FCN_RMSprop00001_FeatNorm_HFlip.py) |
-[Configuration file: Adam opt. (lr=0.0001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam0001_FeatNorm_HFlip.py) |
-[Configuration file: Adam opt. (lr=0.001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam001_FeatNorm_HFlip.py)
+[Baseline](../config/camvid_FCN.py) | [Baseline with Horizontal and Vertical shift (20%)](../config/camvid_FCN_HorVertShift.py) | [Baseline with Horizontal flip](../config/camvid_FCN_horizontal_flip.py) | [Baseline with Feature normalization](../config/camvid_FeatureNormalization.py) | [Baseline with Horizontal flip and feature norm.](../config/camvid_FCN_FeatureNormalization_HorizontalFlip.py) | [RMSprop opt. (lr=0.00001) with Horizontal flip and feature norm.](../config/camvid_FCN_RMSprop00001_FeatNorm_HFlip.py) | [Adam opt. (lr=0.0001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam0001_FeatNorm_HFlip.py) | [Adam opt. (lr=0.001) with Horizontal flip and feature norm.](../config/camvid_FCN_Adam001_FeatNorm_HFlip.py)
 
 
 
@@ -203,8 +196,20 @@ Udacity dataset
 ## Segnet
 ### Results
 
-
 #### SegnetVGG
 [Configuration file](../config/camvid_segmentation_segnetvgg.py) | [Weights file]()
+
+| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
+| ------------- | ------------- |----------------------|----------------------|----------------------|
+| Baseline|   |     |     |     |
+
+Configuration files:
+
 #### Segnet Basic
 [Configuration file](../config/camvid_segmentation_segnetbasic.py) | [Weights file]()
+
+| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
+| ------------- | ------------- |----------------------|----------------------|----------------------|
+| Baseline|   |     |     |     |
+
+Configuration files:

@@ -189,7 +189,7 @@ Configuration files:
 
 | Train with Synthia dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
-| Baseline|   |     |     |     |	
+| Baseline| 93.86  |  93.82   |   0.687  |  0.678   |	
 
 
 

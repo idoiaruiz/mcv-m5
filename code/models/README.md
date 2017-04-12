@@ -195,6 +195,7 @@ Configuration files:
 
 
 ## Segnet
+[SegNet: A Deep Convolutional Encoder-Decoder Architecture for Robust Semantic Pixel-Wise Labelling](https://arxiv.org/abs/1505.07293)
 ### Results
 In these experiments we train the model for the Camvid dataset.
 #### SegnetVGG

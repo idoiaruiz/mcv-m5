@@ -225,8 +225,8 @@ The structure of the Fully Convolutional DenseNet can be understood as an extens
 
 #### Camvid dataset
 
-[Configuration file](../config/) | [Weights file]()
+[Configuration file](../config/camvid_DenseNetFC.py) | [Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CU0g2WTFsNy1jZ1U)
 
 | Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
-| Baseline|   |     |     |    |
+| Baseline|   90.52  |  82.97   |  0.579  |    0.419   |

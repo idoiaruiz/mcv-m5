@@ -196,29 +196,29 @@ Configuration files:
 
 ## Segnet
 ### Results
-
+In these experiments we train the model for the Camvid dataset.
 #### SegnetVGG
-[Configuration file](../config/camvid_segmentation_segnetvgg.py) | [Weights file]()
 
-| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
-| ------------- | ------------- |----------------------|----------------------|----------------------|
-| Baseline|   |     |     |     |
+| Experiment | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
+| ------- | --- |---|---|---|
+| Baseline|   89.66  |  80.90 |  0.547 | 0.397  |
+| Adam lr=0.0001 + Horizontal flip + feature norm. | 90.67 | 84.05 | 0.553 | 0.429 |
 
-Configuration files:
+[Baseline configuration file](../config/camvid_segmentation_segnetvgg.py) | [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvcFU5a0liRzA5Z0U)
 
 #### Segnet Basic
-[Configuration file](../config/camvid_segmentation_segnetbasic.py) | [Weights file]()
 
-| Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
-| ------------- | ------------- |----------------------|----------------------|----------------------|
-| Baseline|   |     |     |     |
+| Experiment | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
+| ------- | --- |---|---|---|
+| Baseline (unpooling)|   88.68  |  81.36 |  0.512 | 0.401  |
+| Upsampling not keeping the max-pooling indices |  86.67   |  77.21 | 0.482  | 0.368  |
 
-Configuration files:
+[Baseline configuration file](../config/camvid_segmentation_segnetbasic.py) | [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvdFB5eFZ4SVd2Zjg)
 
 ## DenseNet FCN
 ### Summary
 
-The structure of the Fully Convolutional DenseNet can be understood as an extension of DenseNet classification architecture to the object segmentation problem. The structure of this network is the following: it defines three different blocks: a dense block, a transition down and a transition up. The dense block is composed by a Batch Normalization, a ReLU activation, a 3x3 convolution and a dropout of fraction 0.2. The transition down block is formed by a Batch Normalization, ReLU a activation, a 1x1 convolution, a dropout of fraction 0.2 and a non-overlapping max pooling of 2x2. Finally, the transition up block only has a 3x3 deconvolution with stride 2. To create the network, dense blocks of different sizes are created with a transition down block between each pair of them for the downsampling path. For the upsampling path, the same dense blocks are created in descending order with skip connections and transition up blocks so a proper segmentation  map can be properly obtained.
+The structure of the Fully Convolutional DenseNet can be understood as an extension of DenseNet classification architecture to the object segmentation problem. The structure of this network is the following: it defines three different blocks: a dense block, a transition down and a transition up. The dense block is composed by a Batch Normalization, a ReLU activation, a 3x3 convolution and a dropout of fraction 0.2. The transition down block is formed by a Batch Normalization, a ReLU activation, a 1x1 convolution, a dropout of fraction 0.2 and a non-overlapping max pooling of 2x2. Finally, the transition up block only has a 3x3 deconvolution with stride 2. To create the network, dense blocks of different sizes are created with a transition down block between each pair of them for the downsampling path. For the upsampling path, the same dense blocks are created in descending order with skip connections and transition up blocks so a proper segmentation  map can be properly obtained.
 
 ### Results
 

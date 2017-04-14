@@ -51,7 +51,7 @@ python train.py -c config/dataset.py -e expName
 - [Summaries, results and trained weights](https://github.com/idoiaruiz/mcv-m5/tree/master/code/models#models) for the used models
 
 ## Contributors :couple::couple:
- * [Idoia Ruiz](https://github.com/idoiaruiz) (idoiaruizl@gmail.com)
+ * [Idoia Ruiz](https://github.com/idoiaruiz) (idoia.ruizl@e-campus.uab.cat)
  * [Roque Rodriguez](https://github.com/RoqueRouteiral) (roque.rodriguez.outeiral@gmail.com)
  * [Lidia Talavera](https://github.com/LidiaTalavera) (talaveramartinez.l@gmail.com)
  * [Onofre Martorell](https://github.com/OnofreMartorell) (onofremartorelln@gmail.com)

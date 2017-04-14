@@ -9,25 +9,31 @@ This repo contains the code to train and evaluate state of the art classificatio
 ### Classification
  - [x] VGG16 and VGG19 network as described in [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf).
  - [x] [ResNet](https://arxiv.org/pdf/1512.03385.pdf).
- - [x] InceptionV3
- - [x] DenseNet
+ - [x] [InceptionV3](https://arxiv.org/abs/1512.00567)
+ - [x] [DenseNet](https://arxiv.org/pdf/1608.06993.pdf)
 
 ### Detection
  - [x] YOLO network as described in [You Only Look Once: Unified, Real-Time Object Detection](https://pjreddie.com/media/files/papers/yolo.pdf).
+ - [x] [SSD](https://arxiv.org/abs/1512.02325)
 
 ### Segmentation
  - [x] FCN8 network as described in [Fully Convolutional Neural Networks](https://arxiv.org/abs/1608.06993).
+ - [x] [SegNet](https://arxiv.org/abs/1505.07293)
+ - [x] [DenseNetFCN](https://arxiv.org/abs/1611.09326)
 
 ## Available dataset wrappers
 
 ### Classification
  - [x] TT100K classsification dataset described in [Traffic-Sign Detection and Classification in the Wild](http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Zhu_Traffic-Sign_Detection_and_CVPR_2016_paper.pdf).
+ - [x] Belgium Traffic Signs [dataset](http://btsd.ethz.ch/shareddata/).
 
 ### Detection
  - [x] TT100K detection dataset described in [Traffic-Sign Detection and Classification in the Wild](http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Zhu_Traffic-Sign_Detection_and_CVPR_2016_paper.pdf).
+ - [x] [Udacity dataset](https://www.udacity.com/course/deep-learning--ud730).
 
 ### Segmentation
  - [x] Camvid dataset described in [Semantic Object Classes in Video: A High-Definition Ground Truth Database ](http://www.cs.ucl.ac.uk/staff/G.Brostow/papers/SemanticObjectClassesInVideo_BrostowEtAl2009.pdf).
+ - [x] Synthia [dataset](http://synthia-dataset.net/).
 
 ## Installation
 You need to install :

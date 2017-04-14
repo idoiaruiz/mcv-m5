@@ -145,6 +145,7 @@ We train YOLO with the preconfigured experiment file for the TT100K and Udacity 
 [Configuration file Horizontal flip and feature norm.](../config/yoloDataAugFeatNormUdacity.py)
 
 ## SSD
+[SSD: Single Shot MultiBox Detector](https://arxiv.org/abs/1512.02325)
 ### Results
 
 We trained the SSD model from scrath for the TT100K and Udacity datasets. However the metrics are still not implemented to evaluate the model.
@@ -217,6 +218,7 @@ In these experiments we train the model for the Camvid dataset.
 [Baseline configuration file](../config/camvid_segmentation_segnetbasic.py) | [Weights file](https://drive.google.com/open?id=0B06nnAKc0eZvdFB5eFZ4SVd2Zjg)
 
 ## DenseNet FCN
+[The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation](https://arxiv.org/abs/1611.09326)
 ### Summary
 
 The structure of the Fully Convolutional DenseNet can be understood as an extension of DenseNet classification architecture to the object segmentation problem. The structure of this network is the following: it defines three different blocks: a dense block, a transition down and a transition up. The dense block is composed by a Batch Normalization, a ReLU activation, a 3x3 convolution and a dropout of fraction 0.2. The transition down block is formed by a Batch Normalization, a ReLU activation, a 1x1 convolution, a dropout of fraction 0.2 and a non-overlapping max pooling of 2x2. Finally, the transition up block only has a 3x3 deconvolution with stride 2. To create the network, dense blocks of different sizes are created with a transition down block between each pair of them for the downsampling path. For the upsampling path, the same dense blocks are created in descending order with skip connections and transition up blocks so a proper segmentation  map can be properly obtained.
@@ -225,8 +227,8 @@ The structure of the Fully Convolutional DenseNet can be understood as an extens
 
 #### Camvid dataset
 
-[Configuration file](../config/camvid_DenseNetFC.py) | [Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CU0g2WTFsNy1jZ1U)
-
 | Train with Camvid dataset | Validation accuracy (%) | Test accuracy (%) | Jaccard mean - Validation set| Jaccard mean - Test set|
 | ------------- | ------------- |----------------------|----------------------|----------------------|
 | Baseline|   90.52  |  82.97   |  0.579  |    0.419   |
+
+[Configuration file](../config/camvid_DenseNetFC.py) | [Weights file](https://drive.google.com/open?id=0B1fN3dKxIN8CU0g2WTFsNy1jZ1U)

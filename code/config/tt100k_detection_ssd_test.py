@@ -10,8 +10,8 @@ freeze_layers_from           = None            # Freeze layers from 0 to this la
 different_datasets           = False
 show_model                   = True           # Show the architecture layers
 load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
-load_pretrained              = False           # Load a pretrained model for doing finetuning
-weights_file                 = 'weights.hdf5'  # Training weight file name
+load_pretrained              = True           # Load a pretrained model for doing finetuning
+weights_file                 = '/home/master/M5/results/Experiments/TT100K_detection/trainssd/weights.hdf5'  # Training weight file name
 
 # Parameters
 train_model                  = True            # Train the model
@@ -74,7 +74,8 @@ checkpoint_verbose           = 1               # Verbosity of the checkpoint
 # Callback plot
 plotHist_enabled             = False            # Enable the Callback
 plotHist_verbose             = 0               # Verbosity of the callback
-
+LRScheduler_enabled = False
+TensorBoard_enabled = False
 # Callback LR decay scheduler
 lrDecayScheduler_enabled     = False           # Enable the Callback
 lrDecayScheduler_epochs      = [5, 10, 20]     # List of epochs were decay is applied or None for all epochs
